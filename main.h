@@ -8,6 +8,29 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+/*list.c*/
+/**
+ * struct list_s - singly linked list
+ * @str: string - (malloc'ed string)
+ * @len: length of the string
+ * @next: points to the next node
+ *
+ * Description: singly linked list node structure
+ */
+typedef struct Node
+{
+	char *data;
+	struct Node *next;
+} Node;
+
+Node *new_node(const char *data);
+void add_node(Node **head, const char *data);
+void print_list(Node *head);
+void free_list(Node *head);
+size_t list_len(const Node *head);
+
+
+int _putchar(char);
 
 /*environ.c*/
 extern char **environ;
