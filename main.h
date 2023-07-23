@@ -8,6 +8,8 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <dirent.h>
+
 /*list.c*/
 /**
  * struct list_s - singly linked list
@@ -29,8 +31,10 @@ void print_list(Node *head);
 void free_list(Node *head);
 size_t list_len(const Node *head);
 
+/*path.c*/
+Node *build_path_list(void);
+char *find_file_in_path(Node *head, char *filename);
 
-int _putchar(char);
 
 /*environ.c*/
 extern char **environ;
@@ -38,4 +42,5 @@ char *_getenv(const char *name);
 int _setenv(const char *name, const char *value, int overwrite);
 int _unsetenv(const char *name);
 
+int _putchar(char);
 #endif
