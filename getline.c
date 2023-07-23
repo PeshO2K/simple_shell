@@ -2,8 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * my_getline - Read a line from a file or a stream.
+ * @store: Double pointer to store the read line.
+ * @input_len: Pointer to the length of the buffer.
+ * @stream: Pointer to the input stream (e.g., file pointer).
+ *
+ * Return: Number of characters read, including the newline character,
+ *         or -1 if an error occurs or the end of the file is reached.
+ */
 ssize_t my_getline(char **store, size_t *input_len, FILE *stream)
 {
+	*input_len = 1024;
 
 	if (input_len == NULL || stream == NULL)
 	{
@@ -11,10 +21,6 @@ ssize_t my_getline(char **store, size_t *input_len, FILE *stream)
 		return (-1);
 	}
 
-	/* arbitrary buffer size */
-	*input_len = 1024;
-
-	/* allocate buffer */
 	*store = malloc(sizeof(char) * (*input_len));
 
 	if (*store == NULL)
@@ -23,45 +29,24 @@ ssize_t my_getline(char **store, size_t *input_len, FILE *stream)
 		return (-1);
 	}
 
-	/* read from stream */
 	if (fgets(*store, *input_len, stream) == NULL)
 	{
-		/* free buffer if nothing is read */
 		free(*store);
 		return (-1);
 	}
-	/* get the length of the string */
 	*input_len = strlen(*store);
 
-	/* resize buffer to fit the string */
 	*store = realloc(*store, sizeof(char) * (*input_len + 1));
-
 	if (*store == NULL)
 	{
 		perror("memory allocation failed");
 		return (-1);
 	}
 
-	/*removes the newline character*/
 	char *newline = strchr(*store, '\n');
+
 	if (newline != NULL)
-	{
 		*newline = '\0';
-	}
+
 	return ((ssize_t)*input_len);
-}
-
-int main(void)
-{
-	char *line = NULL;
-	size_t n = 0;
-
-	while (my_getline(&line, &n, stdin) != -1)
-	{
-		printf("You entered: %s\n", line);
-	}
-
-	free(line);
-
-	return (0);
 }
