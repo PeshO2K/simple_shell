@@ -42,5 +42,16 @@ char *_getenv(const char *name);
 int _setenv(const char *name, const char *value, int overwrite);
 int _unsetenv(const char *name);
 
+/*builtin*/
+
+typedef struct
+{
+	char *name;
+	void (*func)(char **);
+} builtin_t;
+       
+void _exit(char **ag);
+void _env();
+
 int _putchar(char);
 #endif
