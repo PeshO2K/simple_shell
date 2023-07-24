@@ -1,9 +1,17 @@
 #include "main.h"
+
 builtin_t builtins[] = {
 	{"exit", _exit},
 	{"env", _env},
+	{"cd", _cd},
+	{"alias", _alias},
+	{"setenv", _setenv},
+	{"unsetenv", _unsetenv}
+	{NULL, NULL}
+
 };
-void _exit(char **ag)
+
+int _exit(char **ag)
 {
 	int exit_status = 0;
 
@@ -15,7 +23,7 @@ void _exit(char **ag)
 	exit(exit_status);
 }
 
-void _env(char **ag)
+int _env(char **ag)
 {
 	char **env = environ;
 
@@ -25,4 +33,28 @@ void _env(char **ag)
 		write(STDOUT_FILENO, "\n", 1);
 	}
 	
+}
+
+int execute_builtin(char **ag)
+{
+	int i = 0;
+
+	for (; builtins[i].name; i++)
+	{
+		if (strcmp(ag[0], builtins[i].name) == 0)
+		{
+			return(*builtins[i].func)(ag);
+		}
+	}
+	return (-1);
+}
+
+int _alias(char **ag)
+{
+	return (0);
+}
+
+int _cd(char **ag)
+{
+	return (0);
 }
