@@ -54,4 +54,7 @@ void _exit(char **ag);
 void _env();
 
 int _putchar(char);
+
+char *my_strtok(char *str, const char *delim);
+
 #endif
