@@ -70,6 +70,83 @@ char **handle_separator(char *input)
 	return (commands);
 }
 
+int handle_logical_operators(char *input)
+{
+	int commands_len = 0;
+	char **commands;
+	char *copy;
+	char **result;
+	int i;
+
+	if (input == NULL || input[0] == '\0')
+		return (NULL);
+
+	copy = strdup(input);
+	if (copy == NULL || or == NULL)
+	{
+		perror("strdup");
+		free(copy);
+		return (NULL);
+	}
+
+	if (strcmp(copy, "&&") == 0)
+	{
+		commands = split_string(input, &commands_len, "&&");
+		if (commands == NULL)
+		{
+			perror("split_string");
+			free(copy);
+			return (NULL);
+		}
+
+		for (i = 0; i < commands_len - 1; i++)
+		{
+			result = exec(commands[i]);
+
+			if (result != NULL)
+			{
+				exec(commands[i + 1]);
+
+				free(result);
+			}
+
+			free(commands[i]);
+		}
+
+		free(commands[i]);
+		free(commands);
+	}
+	else if (strcmp(copy, "||") == 0)
+	{
+		commands = split_string(input, &commands_len, "||");
+		if (commands == NULL)
+		{
+			perror("split_string");
+			free(copy);
+			free(or);
+			return (NULL);
+		}
+
+		for (i = 0; i < commands_len - 1; i++)
+		{
+			result = exec(commands[i]);
+			if (result == NULL)
+			{
+				exec(commands[i + 1]);
+				free(result);
+			}
+
+			free(commands[i]);
+		}
+
+		free(commands[i]);
+		free(commands);
+	}
+
+	free(copy);
+	return (0);
+}
+
 int main()
 {
 	char *command_line = NULL;
