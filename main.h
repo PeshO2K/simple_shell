@@ -50,10 +50,10 @@ typedef struct
 	void (*func)(char **);
 } builtin_t;
        
-int _exit(char **ag);
-int _env(char **ag);
-int _cd(char **ag);
-int _alias(char **ag);
+int _my_exit(char **ag);
+int _my_env(char **ag);
+int _my_cd(char **ag);
+int _my_alias(char **ag);
 
 int _putchar(char);
 

@@ -1,5 +1,5 @@
 #include "main.h"
-int _exit(char **ag)
+int _my_exit(char **ag)
 {
 	int exit_status = 0;
 
@@ -11,7 +11,7 @@ int _exit(char **ag)
 	exit(exit_status);
 }
 
-int _env(char **ag)
+int _my_env(char **ag)
 {
 	char **env = environ;
 
@@ -46,12 +46,12 @@ int execute_builtin(char **ag)
 	return (-1);
 }
 
-int _alias(char **ag)
+int _my_alias(char **ag)
 {
 	return (0);
 }
 
-int _cd(char **ag)
+int _my_cd(char **ag)
 {
 	return (0);
 }
