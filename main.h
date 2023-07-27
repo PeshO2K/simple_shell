@@ -12,9 +12,8 @@
 
 /*list.c*/
 /**
- * struct list_s - singly linked list
- * @str: string - (malloc'ed string)
- * @len: length of the string
+ * struct Node- singly linked list
+ * @data: string - (malloc'ed string)
  * @next: points to the next node
  *
  * Description: singly linked list node structure
@@ -43,12 +42,19 @@ int _setenv(const char *name, const char *value, int overwrite);
 int _unsetenv(const char *name);
 
 /*builtin*/
-typedef struct
+/**
+ * struct builtin_t - singly linked list
+ * @name: function name
+ * @func: function pointer
+ *
+ * Description: singly linked list node structure
+ */
+typedef struct builtin_t
 {
 	char *name;
 	int (*func)(char **);
 } builtin_t;
-       
+
 int _my_exit(char **ag);
 int _my_env(char **ag);
 int _my_cd(char **ag);
@@ -58,7 +64,7 @@ int execute_builtin(char **ag);
 int _putchar(char);
 
 /*executor*/
-int execute_cmd(char **args,char **env);
+int execute_cmd(char **args, char **env);
 
 /*strtok*/
 char *my_strtok(char *str, const char *delim);

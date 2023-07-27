@@ -1,4 +1,9 @@
 #include "main.h"
+/**
+ * _my_exit - implements exit and arguments
+ *@ag: takes arguments
+ * Return: Exit status
+ */
 int _my_exit(char **ag)
 {
 	int exit_status = 0;
@@ -11,6 +16,11 @@ int _my_exit(char **ag)
 	exit(exit_status);
 }
 
+/**
+ * _my_env - prints environment variables
+ *@ag: takes arguments
+ * Return: 0 always
+ */
 int _my_env(char **ag)
 {
 	(void) ag;
@@ -24,6 +34,11 @@ int _my_env(char **ag)
 	return (0);
 }
 
+/**
+ * execute_builtin - finds and execute builtin fxn
+ *@ag: takes arguments
+ * Return: 0 on success -1 on failure
+ */
 int execute_builtin(char **ag)
 {
 
@@ -48,12 +63,22 @@ int execute_builtin(char **ag)
 	return (-1);
 }
 
+/**
+ * _my_alias - finds alias of fxn
+ *@ag: takes arguments
+ * Return: 0 on sucess and -1 failure
+ */
 int _my_alias(char **ag)
 {
 	(void) ag;
 	return (0);
 }
 
+/**
+ * _my_cd - changes working directory
+ *@ag: takes arguments
+ * Return: 0 on sucess and -1 failure
+ */
 int _my_cd(char **ag)
 {
 	(void) ag;
