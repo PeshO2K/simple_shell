@@ -28,7 +28,7 @@ Node *new_node(const char *data)
 {
 	Node *node = malloc(sizeof(Node));
 
-	if (new_node == NULL)
+	if (node == NULL)
 	{
 		return (NULL);
 	}

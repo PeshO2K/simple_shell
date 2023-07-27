@@ -13,6 +13,7 @@ int _my_exit(char **ag)
 
 int _my_env(char **ag)
 {
+	(void) ag;
 	char **env = environ;
 
 	for (; *env; env++)
@@ -49,10 +50,12 @@ int execute_builtin(char **ag)
 
 int _my_alias(char **ag)
 {
+	(void) ag;
 	return (0);
 }
 
 int _my_cd(char **ag)
 {
+	(void) ag;
 	return (0);
 }

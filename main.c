@@ -6,8 +6,8 @@ int main(int ac  __attribute__((unused)),char **ag __attribute__((unused)))
 	char *line,*filepath;
 	size_t line_size = 0;
 	char **args;
-	pid_t cpid;
-	int status, int_mode = 1;
+	/*pid_t cpid;*/
+	int int_mode = 1;
 
 	while(int_mode)
 	{
