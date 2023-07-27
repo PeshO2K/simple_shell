@@ -6,6 +6,7 @@ int execute_cmd(char **args,char **env)
 {
 	int status;
 	pid_t child_pid;
+	(void) env;
 /*	char *filepath;
 *	
 	if (strncmp(args[0], "/", 1) != 0)
@@ -34,10 +35,10 @@ int execute_cmd(char **args,char **env)
 
 		if (child_pid == 0)
 		{
-			if(execve(args[0],args, env) == -1)
+			printf("Child execution\n");
+			if(execve(args[0], args, environ) == -1)
 			{
-				printf("Nikona error");
-				perror("Error: ");
+				perror(_getenv("_"));
 			}
 		}
 		else if (child_pid < 0)

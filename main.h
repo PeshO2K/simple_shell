@@ -65,4 +65,5 @@ char *my_strtok(char *str, const char *delim);
 ssize_t my_getline(char **store, size_t *input_len, FILE *stream);
 char **handle_separator(char *input);
 char **split_string(char *str, int *num_words, char *delim);
+char **parse(const char *cmd, const char *delim);
 #endif

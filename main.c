@@ -3,11 +3,11 @@
 int main(int ac  __attribute__((unused)),char **ag __attribute__((unused)))
 {
 	/*size_t chars;*/
-	char *line,*filepath;
+	char *line,*filepath = NULL;
 	size_t line_size = 0;
 	char **args;
 	/*pid_t cpid;*/
-	int int_mode = 1;
+	int int_mode = 1;/* i;*/
 
 	while(int_mode)
 	{
@@ -19,9 +19,10 @@ int main(int ac  __attribute__((unused)),char **ag __attribute__((unused)))
 		}
 	
 
-		getline(&line, &line_size, stdin);
+		my_getline(&line, &line_size, stdin);
 		/*printf("getline successful\n");*/
-		args = handle_separator(line);
+		/*args = handle_separator(line);*/
+		args = parse(line," \n");
 		/*printf("Printing arg[0]: %s\n",args[0]);
 		for (int i = 0; args[i] != NULL; i++)
         	{
@@ -37,13 +38,26 @@ int main(int ac  __attribute__((unused)),char **ag __attribute__((unused)))
 			if (execute_builtin(args) == -1)
 			{
 				filepath = find_file_in_path(args[0]);
-				args[0] = filepath;
+				if (!filepath)
+				{
+					perror(_getenv("_"));
+				}
+				else
+				{
+					args[0] = filepath;
+				/*	i = 0;
+					while(args[i])
+					{
+						printf("%s \n", args[i]);
+						i++;
+					}*/
+				}
 				/*printf("%s\n",filepath);*/
 			}
-			else
+			/*else
 			{
 				filepath = NULL;
-			}
+			}*/
 		}	
 		if (filepath)
 		{
