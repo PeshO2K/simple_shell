@@ -16,9 +16,10 @@ Node *build_path_list(void)
 	return (head);
 }
 
-char *find_file_in_path(Node *head, char *filename)
+char *find_file_in_path(char *filename)
 {
-	Node *cursor = head;
+	/*Node *cursor = head;*/
+	Node *cursor = build_path_list();
 
 	while (cursor)
 	{

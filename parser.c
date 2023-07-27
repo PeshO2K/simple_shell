@@ -45,7 +45,7 @@ char **handle_separator(char *input)
 {
 	int commands_len = 0;
 	char **commands;
-	char *semicolon, *spaces, *comments;
+	char *semicolon, *spaces, *comments, *newline;
 
 	if (input == NULL || input[0] == '\0')
 		return (NULL);
@@ -53,6 +53,7 @@ char **handle_separator(char *input)
 	semicolon = strpbrk(strdup(input), ";");
 	spaces = strpbrk(strdup(input), " ");
 	comments = strpbrk(strdup(input), "#");
+	newline = strpbrk(strdup(input), "\n");
 
 	if (comments != NULL)
 	{
@@ -66,10 +67,14 @@ char **handle_separator(char *input)
 	{
 		commands = split_string(input, &commands_len, " ");
 	}
+	else if (newline)
+	{
+		commands = split_string(input, &commands_len, "\n");
+	}
 
 	return (commands);
 }
-
+/*
 int handle_logical_operators(char *input)
 {
 	int commands_len = 0;
@@ -153,7 +158,7 @@ int main()
 	size_t len = 0;
 	char **commands;
 
-	getline(&command_line, &len, stdin);
+	my_getline(&command_line, &len, stdin);
 
 	commands = handle_separator(command_line);
 
@@ -165,4 +170,4 @@ int main()
 	free(commands);
 	free(command_line);
 	return 0;
-}
+}*/

@@ -33,7 +33,7 @@ size_t list_len(const Node *head);
 
 /*path.c*/
 Node *build_path_list(void);
-char *find_file_in_path(Node *head, char *filename);
+char *find_file_in_path(char *filename);
 
 
 /*environ.c*/
@@ -43,20 +43,26 @@ int _setenv(const char *name, const char *value, int overwrite);
 int _unsetenv(const char *name);
 
 /*builtin*/
-
 typedef struct
 {
 	char *name;
-	void (*func)(char **);
+	int (*func)(char **);
 } builtin_t;
        
 int _my_exit(char **ag);
 int _my_env(char **ag);
 int _my_cd(char **ag);
 int _my_alias(char **ag);
-
+int execute_builtin(char **ag);
+/*helper functions*/
 int _putchar(char);
 
-char *my_strtok(char *str, const char *delim);
+/*executor*/
+int execute_cmd(char **args,char **env);
 
+/*strtok*/
+char *my_strtok(char *str, const char *delim);
+ssize_t my_getline(char **store, size_t *input_len, FILE *stream);
+char **handle_separator(char *input);
+char **split_string(char *str, int *num_words, char *delim);
 #endif
