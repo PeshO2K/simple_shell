@@ -17,7 +17,7 @@ int main(int ac  __attribute__((unused)), char **ag __attribute__((unused)))
 		int_mode = isatty(STDIN_FILENO);
 		if (int_mode)
 		{
-			printf("$ ");
+			printf("# ");
 		}
 		/*printf("loop: %d\n",i);*/
 		my_getline(&line, &line_size, stdin);
