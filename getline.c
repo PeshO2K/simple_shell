@@ -13,6 +13,7 @@
  */
 ssize_t my_getline(char **store, size_t *input_len, FILE *stream)
 {
+	char *newline;
 	*input_len = 1024;
 
 	if (input_len == NULL || stream == NULL)
@@ -43,7 +44,9 @@ ssize_t my_getline(char **store, size_t *input_len, FILE *stream)
 		return (-1);
 	}
 
-	char *newline = strchr(*store, '\n');
+	/*char *newline;*/
+
+	newline = strchr(*store, '\n');
 
 	if (newline != NULL)
 		*newline = '\0';
