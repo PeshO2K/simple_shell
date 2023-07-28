@@ -32,6 +32,8 @@ char *find_file_in_path(char *filename)
 {
 	/*Node *cursor = head;*/
 	Node *cursor = build_path_list();
+	size_t full_path_len;
+	char *full_path;
 
 	while (cursor)
 	{
@@ -47,8 +49,10 @@ char *find_file_in_path(char *filename)
 				{
 					closedir(dir);
 
-					size_t full_path_len = strlen(cursor->data) + strlen(filename) + 2;
-					char *full_path = malloc(full_path_len);
+					/*size_t full_path_len;*/
+
+					full_path_len = strlen(cursor->data) + strlen(filename) + 2;
+					full_path = malloc(full_path_len);
 
 					strncpy(full_path, cursor->data, full_path_len);
 					strncat(full_path, "/", full_path_len - strlen(full_path));

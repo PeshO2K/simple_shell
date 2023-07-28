@@ -23,8 +23,9 @@ int _my_exit(char **ag)
  */
 int _my_env(char **ag)
 {
-	(void) ag;
 	char **env = environ;
+	(void) ag;
+
 
 	for (; *env; env++)
 	{

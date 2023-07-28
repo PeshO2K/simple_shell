@@ -10,6 +10,8 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
+#define DELIM " \n\t\r\a"
+
 /*list.c*/
 /**
  * struct Node- singly linked list
@@ -64,6 +66,7 @@ int execute_builtin(char **ag);
 int _putchar(char);
 
 /*executor*/
+int do_fork(char **args, char **env);
 int execute_cmd(char **args, char **env);
 
 /*strtok*/

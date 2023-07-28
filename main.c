@@ -10,43 +10,28 @@ int main(int ac  __attribute__((unused)), char **ag __attribute__((unused)))
 	char *line, *filepath = NULL;
 	size_t line_size = 0;
 	char **args;
-	int int_mode = 1;/* i;*/
+	int int_mode, i = 0, status = 1;/* i;*/
 
-	while (int_mode)
+	while (status)
 	{
 		int_mode = isatty(STDIN_FILENO);
 		if (int_mode)
 		{
-			printf("$ ");
+			printf("# ");
 		}
+		/*printf("loop: %d\n",i);*/
 		my_getline(&line, &line_size, stdin);
-		args = parse(line, " \n");
-		if (strncmp(args[0], "/", 1) == 0)
+		if (feof(stdin))
 		{
-			filepath = args[0];
+			break;
 		}
-		else
-		{
-			if (execute_builtin(args) == -1)
-			{
-				filepath = find_file_in_path(args[0]);
-				if (!filepath)
-				{
-					perror(_getenv("_"));
-				}
-				else
-				{
-					args[0] = filepath;
-				}
-			}
-		}
-		if (filepath)
-		{
-			execute_cmd(args, environ);
-		}
-		free(line);
+		args = parse(line, DELIM);
+		status = execute_cmd(args, environ);
+
+		/*free(line);*/
 		free(filepath);
 		free(args);
+		i++;
 	}
 	return (0);
 }
