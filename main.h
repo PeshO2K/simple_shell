@@ -75,4 +75,19 @@ ssize_t my_getline(char **store, size_t *input_len, FILE *stream);
 char **handle_separator(char *input);
 char **split_string(char *str, int *num_words, char *delim);
 char **parse(const char *cmd, const char *delim);
+
+/*string.c*/
+int _strlen(char *s);
+int _putchar(char c);
+void _puts(char *str);
+int _atoi(char *s);
+char *_strcpy(char *dest, char *src);
+
+/*string2.c*/
+char *_strchr(char *s, char c);
+/*char *_strcat(char *dest, char *src);*/
+char *_strncat(char *dest, char *src, int n);
+char *_strncpy(char *dest, char *src, int n);
+int _strcmp(char *s1, char *s2);
+int _strncmp(char *s1, char *s2, size_t n);
 #endif
