@@ -10,7 +10,7 @@ int main(int ac  __attribute__((unused)), char **ag __attribute__((unused)))
 	char *line, *filepath = NULL;
 	size_t line_size = 0;
 	char **args;
-	int int_mode, i = 0, status;/* i;*/
+	int int_mode, i = 0, status = 1;/* i;*/
 
 	while (status)
 	{
