@@ -17,7 +17,7 @@ int _atoi(char *s)
 			num = (num * 10) + (*s - '0');
 		else if (num > 0)
 			break;
-        } while (*s++);
+	} while (*s++);
 	return (num * sign);
 }
 
@@ -46,7 +46,7 @@ void _puts(char *str)
 	}
 	while (*str != '\0')
 	{
-		putchar (*str);
+		_putchar (*str);
 		str++;
 	}
 }
@@ -59,7 +59,7 @@ int _strlen(char *s)
 {
 	int counter = 0;
 
-	while(*s != '\0')
+	while (*s != '\0')
 	{
 		counter++;
 		s++;
@@ -77,9 +77,9 @@ int _strlen(char *s)
  */
 char *_strcpy(char *dest, char *src)
 {
-	int i = 0;
+	int i;
 
-	for (i; src[i] != '\0'; i++)
+	for (i = 0; src[i] != '\0'; i++)
 	{
 		dest[i] = src[i];
 	}

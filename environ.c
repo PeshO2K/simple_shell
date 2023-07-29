@@ -2,11 +2,12 @@
 /**
  * _getenv - finds environment variable
  *@name: env variable name
+ *@vars: struct address
  * Return: NULL on failure pointer on sucess
  */
-char *_getenv(const char *name)
+char *_getenv(var_t *vars, const char *name)
 {
-	char *s = *environ;
+	char *s = vars->env;
 
 	for (; s; s++)
 	{

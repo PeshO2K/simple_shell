@@ -1,46 +1,55 @@
 #include "main.h"
 /**
  * _my_exit - implements exit and arguments
- *@ag: takes arguments
+ *@vars: takes arguments
  * Return: Exit status
  */
-int _my_exit(char **ag)
+int _my_exit(var_t *vars)
 {
-	int exit_status = 0;
+	int exit_status;
 
-	if (ag[1])
+	if (vars->args[1])
 	{
-		exit_status = atoi(ag[1]);
+		exit_status = _atoi(vars->args[1]);
+		if (exit_status == -1)
+		{
+			vars->e_status = 2;
+			print_error(vars, ": Illegal number: ");
+			_errputs(vars->args[1]);
+			_errputs("\n");
+			return (1);
+		}
+		vars->err_num = exit_status;
+		return (-2);
 	}
-
-	exit(exit_status);
+	vars->err_num = -1;
+	return (-2);
 }
 
 /**
  * _my_env - prints environment variables
- *@ag: takes arguments
+ *@vars: takes arguments
  * Return: 0 always
  */
-int _my_env(char **ag)
+int _my_env(var_t *vars)
 {
-	char **env = environ;
-	(void) ag;
+	unsigned int i;
 
-
-	for (; *env; env++)
+	for (i = 0; vars->env[i]; i++)
 	{
-		write(STDOUT_FILENO, *env, strlen(*env));
-		write(STDOUT_FILENO, "\n", 1);
+		_puts(vars->env[i]);
+		_puts("\n");
 	}
+	vars->e_status = 0;
 	return (0);
 }
 
 /**
  * execute_builtin - finds and execute builtin fxn
- *@ag: takes arguments
+ *@vars: takes arguments
  * Return: 0 on success -1 on failure
  */
-int execute_builtin(char **ag)
+int execute_builtin(var_t *vars)
 {
 
 	builtin_t builtins[] = {
@@ -55,9 +64,10 @@ int execute_builtin(char **ag)
 	/*printf("\nIn builtins\n");*/
 	for (; builtins[i].name; i++)
 	{
-		if (strcmp(ag[0], builtins[i].name) == 0)
+		if (strcmp(vars->args[0], builtins[i].name) == 0)
 		{
-			return ((builtins[i].func)(ag));
+			vars->line_count++;
+			return (builtins[i].func(vars));
 		}
 	}
 	/*printf("\nI am not a builtin\n");*/
@@ -66,10 +76,10 @@ int execute_builtin(char **ag)
 
 /**
  * _my_alias - finds alias of fxn
- *@ag: takes arguments
+ *@vars: takes arguments
  * Return: 0 on sucess and -1 failure
  */
-int _my_alias(char **ag)
+int _my_alias(var_t *vars)
 {
 	(void) ag;
 	return (0);
@@ -77,10 +87,10 @@ int _my_alias(char **ag)
 
 /**
  * _my_cd - changes working directory
- *@ag: takes arguments
+ *@vars: takes arguments
  * Return: 0 on sucess and -1 failure
  */
-int _my_cd(char **ag)
+int _my_cd(var_t *vars)
 {
 	(void) ag;
 	return (0);

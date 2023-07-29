@@ -1,13 +1,13 @@
 #include "main.h"
 /**
   * build_path_list - list path directories
-  *
+  *@vars: struct address
   *
   * Return: pointer to head
   */
-Node *build_path_list(void)
+Node *build_path_list(var_t *vars)
 {
-	char *PATH = _getenv("PATH");
+	char *PATH = _getenv(vars, "PATH");
 	char *path_cpy = strdup(PATH);
 	char *token = my_strtok(path_cpy, ":");
 
@@ -24,16 +24,15 @@ Node *build_path_list(void)
 
 /**
   * find_file_in_path - finds file path
-  * @filename: name of file
-  *
+  * @vars: struct address
   * Return: NULL or the full path
   */
-char *find_file_in_path(char *filename)
+char *find_file_in_path(var_t *vars)
 {
 	/*Node *cursor = head;*/
-	Node *cursor = build_path_list();
+	Node *cursor = vars->PATH;
 	size_t full_path_len;
-	char *full_path;
+	char *full_path, *filename = vars->args[0];
 
 	while (cursor)
 	{

@@ -1,56 +1,44 @@
 #include "main.h"
+
+
 /**
  * main - Entry point
- * @ac: number of arguments
- * @ag: argument vector
+ * @argc: number of arguments
+ * @argv: argument vector
+ * @environ: env variable
  * Return: 0 Success
  */
-int main(int ac __attribute__((unused)), char **ag __attribute__((unused)))
+int main(int argc, char **argv, char **environ)
 {
-	char *line, *filepath = NULL;
-	size_t line_size = 0;
-	char **args;
-	int int_mode, i = 0, status = 1; /* i;*/
-	FILE *fp;
+	var_t vars = { VAR_INIT };
+	int fd = 2;
 
-	int_mode = isatty(STDIN_FILENO);
-	if (int_mode)
-	{
-		while (status)
-		{
-			printf("# ");
-			/*printf("loop: %d\n",i);*/
-			my_getline(&line, &line_size, stdin);
-			if (feof(stdin))
-			{
-				break;
-			}
-			args = parse(line, DELIM);
-			status = execute_cmd(args, environ);
+	asm ("mov %1, %0\n\t"
+		"add $3, %0"
+		: "=r" (fd)
+		: "r" (fd));
 
-			/*free(line);*/
-			free(filepath);
-			free(args);
-			i++;
-		}
-	}
-	else
+	if (argc == 2)
 	{
-		while (my_getline(&line, &line_size, stdin) != -1)
+		fd = open(argv[1], O_RDONLY);
+		if (fd == -1)
 		{
-			line[strcspn(line, "\n")] = 0;
-			fp = popen(line, "r");
-			if (fp == NULL)
+			if (errno == EACCES)
+				exit(126);
+			if (errno == ENOENT)
 			{
-				perror("Failed to run command");
-				exit(1);
+				_errputs(argv[0]);
+				_errputs(": 0: Can't open ");
+				_errputs(argv[1]);
+				_errputs('\n');
+				exit(127);
 			}
-			while (my_getline(&line, &line_size, fp) != -1)
-			{
-				printf("%s\n", line);
-			}
-			pclose(fp);
+			return (EXIT_FAILURE);
 		}
+		var->rdfd = fd;
 	}
-	return (0);
+	/*populate_env_list(info);*/
+	/*read_history(info);*/
+	shell_loop(vars, argv);
+	return (EXIT_SUCCESS);
 }

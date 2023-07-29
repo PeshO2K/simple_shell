@@ -10,9 +10,9 @@
  */
 char *_strncpy(char *dest, char *src, int n)
 {
-	int i = 0, len = _strlen(src);
+	int i, len = _strlen(src);
 
-	for (i; src[i] && i < n; i++)
+	for (i = 0; src[i] && i < n; i++)
 	{
 		dest[i] = src[i];
 	}
@@ -35,9 +35,9 @@ char *_strncpy(char *dest, char *src, int n)
  */
 char *_strncat(char *dest, char *src, int n)
 {
-	int i = 0, len = _strlen(dest);
+	int i, len = _strlen(dest);
 
-	for (i; src[i] && i < n; i++)
+	for (i = 0; src[i] && i < n; i++)
 	{
 		dest[len++] = src[i];
 	}
@@ -55,12 +55,12 @@ char *_strncat(char *dest, char *src, int n)
  */
 int _strcmp(char *s1, char *s2)
 {
-	 while (*s1 && *s2 && *s1 == *s2)
-	 {
-		 s1++;
-		 s2++;
-	 }
-	 return (*s1 - *s2);
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
 }
 
 /**
@@ -86,7 +86,7 @@ char *_strchr(char *s, char c)
  * _strncmp - Compares pointers to two strings.
  * @s1: A pointer to the first string to be compared.
  * @s2: A pointer to the second string to be compared.
- *
+ * @n: number
  * Return: If str1 < str2, the negative difference
  *         If str1 == str2, 0.
  *         If str1 > str2, the positive difference
