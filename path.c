@@ -7,6 +7,7 @@
   */
 Node *build_path_list(var_t *vars)
 {
+	/*printf("Building path\n");*/
 	char *PATH = _getenv(vars, "PATH");
 	char *path_cpy = strdup(PATH);
 	char *token = my_strtok(path_cpy, ":");
@@ -19,6 +20,7 @@ Node *build_path_list(var_t *vars)
 		token = my_strtok(NULL, ":");
 	}
 	free(path_cpy);
+	/*printf("Path built!!\n");*/
 	return (head);
 }
 
@@ -29,6 +31,7 @@ Node *build_path_list(var_t *vars)
   */
 char *find_file_in_path(var_t *vars)
 {
+	/*printf("finding file\n");*/
 	/*Node *cursor = head;*/
 	Node *cursor = vars->PATH;
 	size_t full_path_len;

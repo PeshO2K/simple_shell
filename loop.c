@@ -9,9 +9,10 @@
 int shell_loop(var_t *vars, char **argv)
 {
 	ssize_t r = 0;
+	size_t len = 0;
 	int mode;
-	char *buf;
-	(void) argv;
+	char *buf = NULL; 
+	
 
 	mode = isatty(STDIN_FILENO);
 	/*printf("\n In loop, mode: %d\n", mode);*/
@@ -19,29 +20,35 @@ int shell_loop(var_t *vars, char **argv)
 
 	while(r != -1)
 	{
+		reset_vars(vars);
+
 		if (mode == 1)
 		{
 			_puts("$ ");
 		}
 		
 
-		/*signal(SIGINT,sigintHandler);*/
+		signal(SIGINT,sigintHandler);
 		
+		/*printf("Bginning line reading \n");*/
+		r = my_getline(&(vars->line), &len, stdin);
+		/*printf("Success reading line\n");*/
 
-		getline(&buf, 0, stdin);
-		if ((buf))
+		if (buf != NULL)
 		{
-			printf("%s",buf);
+			printf ("Printing buffer\n");
+			printf("%s\n",buf);
 			return (0);
 		}
 		
 		if (r != -1)
 		{
+			/*rintf("Executing cmd \n");*/
 			set_vars(vars, argv);
 			execute_cmd(vars);
 
 		}
-		r = -1;
+		
 	}
 
 	return (0);

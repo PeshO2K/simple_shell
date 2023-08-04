@@ -5,9 +5,11 @@
  */
 void reset_vars(var_t *vars)
 {
+	/*printf("Reseting vars ...");*/
 	vars->line = NULL;
 	vars->args = NULL;
 	vars->path = NULL;
+	/*printf("\nSuccess\n");*/
 	/*vars->line = NULL;*/
 }
 /**
@@ -18,9 +20,12 @@ void reset_vars(var_t *vars)
 void set_vars(var_t *vars, char **argv)
 {
 	/*int i = 0;*/
+	/*printf("\nsetting variables ...\n");*/
 
 	vars->myname = argv[0];
+	/*printf("NAme set, building path ...\n");*/
 	vars->PATH = build_path_list(vars);
+	/*printf("path built\n");*/
 	if (vars->line)
 	{
 		vars->args = parse(vars->line, DELIM);

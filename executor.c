@@ -42,13 +42,10 @@ int execute_cmd(var_t *vars)
 {
 	char *cmd_path;
 
-	if (vars-> args[0])
-	{
-		vars->line_count++;
-	}
 
 	if (vars->args[0] && (execute_builtin(vars) == -1))
 	{
+		vars->line_count++;
 		if (strncmp(vars->args[0], "/", 1) != 0)
 		{
 			cmd_path = find_file_in_path(vars);

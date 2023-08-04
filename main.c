@@ -18,6 +18,7 @@ int main(int argc, char **argv)
 
 	/*populate_env_list(info);*/
 	/*read_history(info);*/
+	vars->env = environ;
 	shell_loop(vars, argv);
 	return (EXIT_SUCCESS);
 }

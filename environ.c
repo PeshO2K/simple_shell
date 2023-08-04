@@ -7,13 +7,17 @@
  */
 char *_getenv(var_t *vars, const char *name)
 {
+	/*printf("getting emvironment variable\n");*/
 	char **s = vars->env;
+	size_t len = strlen(name);
+
+	/*printf("starting for loop...\n");*/
 
 	for (; *s; s++)
 	{
-		if ((strncmp(name, *s, strlen(name)) == 0) && (*s[strlen(name)] == '='))
+		if ((strncmp(name, *s, len) == 0) && ((*s)[len] == '='))
 		{
-			return (*s + strlen(name) + 1);
+			return (*s + len + 1);
 		}
 	}
 	return (NULL);
