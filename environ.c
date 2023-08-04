@@ -7,13 +7,13 @@
  */
 char *_getenv(var_t *vars, const char *name)
 {
-	char *s = vars->env;
+	char **s = vars->env;
 
-	for (; s; s++)
+	for (; *s; s++)
 	{
-		if ((strncmp(name, s, strlen(name)) == 0) && (s[strlen(name)] == '='))
+		if ((strncmp(name, *s, strlen(name)) == 0) && (*s[strlen(name)] == '='))
 		{
-			return (&s[strlen(name) + 1]);
+			return (*s + strlen(name) + 1);
 		}
 	}
 	return (NULL);

@@ -81,7 +81,7 @@ int execute_builtin(var_t *vars)
  */
 int _my_alias(var_t *vars)
 {
-	(void) ag;
+	(void) vars;
 	return (0);
 }
 
@@ -92,6 +92,6 @@ int _my_alias(var_t *vars)
  */
 int _my_cd(var_t *vars)
 {
-	(void) ag;
+	(void) vars;
 	return (0);
 }

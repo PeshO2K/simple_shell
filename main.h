@@ -11,11 +11,16 @@
 #include <dirent.h>
 #include <stdbool.h>
 #include <signal.h>
+#include <limits.h>
+#include <errno.h>
+#include <fcntl.h>
 
 #define DELIM " \n\t\r\a"
 #define VAR_INIT \
 {NULL, NULL, NULL, NULL, NULL, NULL, \
-	0, 0, 0, 0, 0}
+	0, 0, 0, 0}
+
+extern char **environ;
 
 /*list.c*/
 /**
@@ -57,7 +62,7 @@ typedef struct my_variables
 	int line_count_flag;
 	int err_num;
 	int e_status;
-	int rdfd;
+/*	int rdfd;*/
 } var_t;
 
 Node *new_node(const char *data);

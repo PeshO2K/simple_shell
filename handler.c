@@ -24,7 +24,7 @@ void _errputs(char *str)
  * Return: 0 if no numbers in string, converted number otherwise
  *        -1 on error
  */
-void print_error(var_t vars, char *emsg)
+void print_error(var_t *vars, char *emsg)
 {
 	_errputs(vars->myname/*_getenv("_")*/);
 	_errputs(": ");

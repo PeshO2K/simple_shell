@@ -17,13 +17,14 @@ int do_fork(var_t *vars)
 	{
 		if (execve(vars->path, vars->args, vars->env) == -1)
 		{
-			print_error(vars, "not found\n");
+			print_error(vars, NULL);
 			return (-1);
 		}
 	}
 	else if (child_pid < 0)
 	{
 		print_error(vars, NULL);
+		return (-1);
 	}
 	else
 	{
@@ -41,6 +42,11 @@ int execute_cmd(var_t *vars)
 {
 	char *cmd_path;
 
+	if (vars-> args[0])
+	{
+		vars->line_count++;
+	}
+
 	if (vars->args[0] && (execute_builtin(vars) == -1))
 	{
 		if (strncmp(vars->args[0], "/", 1) != 0)
@@ -56,7 +62,7 @@ int execute_cmd(var_t *vars)
 		{
 			if (test_path(vars) == 0)
 			{
-				vars->path = args[0];
+				vars->path = vars->args[0];
 			}
 		}
 		if (vars->path)

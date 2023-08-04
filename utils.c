@@ -17,7 +17,7 @@ void reset_vars(var_t *vars)
  */
 void set_vars(var_t *vars, char **argv)
 {
-	int i = 0;
+	/*int i = 0;*/
 
 	vars->myname = argv[0];
 	vars->PATH = build_path_list(vars);
@@ -30,7 +30,7 @@ void set_vars(var_t *vars, char **argv)
 			vars->args = malloc(sizeof(char *) * 2);
 			if (vars->args)
 			{
-				vars->args[0] = _strdup(vars->line);
+				vars->args[0] = strdup(vars->line);
 				vars->args[1] = NULL;
 			}
 		}
@@ -62,8 +62,8 @@ void free_vars(var_t *vars, int all)
 		ffree(vars->env);
 		vars->env = NULL;
 
-		if (vars->rdfd > 2)
-			close(vars->rdfd);
+
+		
 	}
 }
 /**
@@ -85,5 +85,10 @@ void sigintHandler(__attribute__((unused))int sig_num)
  */
 int interactive(var_t *vars)
 {
-	return (isatty(STDIN_FILENO) && vars->rdfd <= 2);
+	(void) vars;
+	int mode;
+
+	mode = isatty(STDIN_FILENO);
+
+	return (mode && 1);
 }

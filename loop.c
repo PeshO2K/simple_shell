@@ -8,33 +8,41 @@
  */
 int shell_loop(var_t *vars, char **argv)
 {
-	ssize_t ret = 0;
-	int bin_ret = 0;
+	ssize_t r = 0;
+	int mode;
+	char *buf;
+	(void) argv;
 
-	while (ret != -1 && bin_ret != -2)
+	mode = isatty(STDIN_FILENO);
+	/*printf("\n In loop, mode: %d\n", mode);*/
+	
+
+	while(r != -1)
 	{
-		reset_vars(vars);
-		if (interactive(vars))
+		if (mode == 1)
+		{
 			_puts("$ ");
+		}
+		
 
-		ret = get_input(vars);
-		if (ret != -1)
+		/*signal(SIGINT,sigintHandler);*/
+		
+
+		getline(&buf, 0, stdin);
+		if ((buf))
+		{
+			printf("%s",buf);
+			return (0);
+		}
+		
+		if (r != -1)
 		{
 			set_vars(vars, argv);
-			bin_ret = execute_builtin(vars);
+			execute_cmd(vars);
+
 		}
-		else if (interactive(vars))
-			_putchar('\n');
-		free_vars(vars, 0);
+		r = -1;
 	}
-	free_vars(vars, 1);
-	if (!interactive(vars) && vars->e_status)
-		exit(vars->e_status);
-	if (bin_ret == -2)
-	{
-		if (vars->err_num == -1)
-			exit(vars->e_status);
-		exit(vars->err_num);
-	}
-	return (bin_ret);
+
+	return (0);
 }
