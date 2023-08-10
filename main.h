@@ -20,7 +20,7 @@
 {NULL, NULL, NULL, NULL, NULL, NULL, \
 	0, 0, 0, 0}
 
-extern char **environ;
+
 
 /*list.c*/
 /**

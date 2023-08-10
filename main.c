@@ -8,7 +8,7 @@
  * @environ: env variable
  * Return: 0 Success
  */
-int main(int __attribute__((__unused__)) argc, char **argv)
+int main(int __attribute__((__unused__)) argc, char **argv, char **environ)
 {
 	var_t vars [] = { VAR_INIT };
 	/*(void) vars;*/
@@ -17,6 +17,7 @@ int main(int __attribute__((__unused__)) argc, char **argv)
 
 	/*populate_env_list(info);*/
 	/*read_history(info);*/
+	/*_puts(environ[0]);*/
 	vars->env = copyenv(environ);
 
 	if(*(vars->env))

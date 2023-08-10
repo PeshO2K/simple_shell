@@ -41,8 +41,12 @@ int do_fork(var_t *vars)
 				exit(2);
 			}
 		}
+		return (0);
 	}
-	return (0);
+	print_error(vars, NULL);
+	exit(127);
+
+	
 }
 /**
  * execute_cmd - creates child process and executes command
@@ -53,6 +57,8 @@ int do_fork(var_t *vars)
 int execute_cmd(var_t *vars)
 {
 	char *cmd_path;
+	int a,b,c,d;
+	
 
 
 	if (vars->args[0] && (execute_builtin(vars) == -1))
@@ -74,9 +80,21 @@ int execute_cmd(var_t *vars)
 			{
 				vars->path = vars->args[0];
 			}
+			else
+			{
+				print_error(vars, "not found\n");
+				exit (127);
+			}
 		}
-		if (vars->path && (isatty(STDIN_FILENO) || (vars->PATH != NULL) || vars->args[0][0] == '/'))
+		a = ((access(vars->path, X_OK) == 0) && (vars->path != NULL));
+		b = isatty(STDIN_FILENO);
+		c = (vars->PATH != NULL);
+		d = (vars->args[0][0] == '/');
+
+		if (a && (b || c || d))
+		/*if ((access(vars->path, X_OK) == 0) && (isatty(STDIN_FILENO) || (vars->PATH != NULL) || (vars->args[0][0] == '/')))*/
 		{
+			
 			return (do_fork(vars));
 		}
 		else
