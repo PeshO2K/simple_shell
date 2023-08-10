@@ -108,6 +108,9 @@ int execute_builtin(var_t *vars);
 void _errputs(char *str);
 void print_error(var_t *vars, char *emsg);
 char *_uitoa(unsigned int num);
+void print_unsigned_int(unsigned int n);
+
+
 /*executor*/
 int do_fork(var_t *vars);
 int execute_cmd(var_t *vars);

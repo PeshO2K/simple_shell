@@ -29,7 +29,7 @@ void set_vars(var_t *vars, char **argv)
 	if (vars->line)
 	{
 		vars->args = parse(vars->line, DELIM);
-		if (!*(vars->args))
+		if (!(vars->args))
 		{
 
 			vars->args = malloc(sizeof(char *) * 2);

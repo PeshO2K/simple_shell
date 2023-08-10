@@ -28,7 +28,7 @@ void print_error(var_t *vars, char *emsg)
 {
 	_errputs(vars->myname/*_getenv("_")*/);
 	_errputs(": ");
-	_errputs(_uitoa(vars->line_count));
+	print_unsigned_int(vars->line_count);
 	_errputs(": ");
 	_errputs(vars->args[0]);
 	_errputs(": ");
@@ -54,11 +54,13 @@ char *_uitoa(unsigned int count)
 {
 	char *numstr;
 	unsigned int tmp, digits;
+	
+	
 
 	tmp = count;
 	for (digits = 0; tmp != 0; digits++)
 		tmp /= 10;
-	numstr = malloc(sizeof(char) * (digits + 1));
+	numstr = malloc(sizeof(char) * (digits + 2));
 	if (numstr == NULL)
 	{
 		perror("Fatal Error1");
@@ -70,5 +72,21 @@ char *_uitoa(unsigned int count)
 		numstr[digits] = (count % 10) + '0';
 		count /= 10;
 	}
+	_puts(numstr);
 	return (numstr);
+}
+void print_unsigned_int(unsigned int n) 
+{
+	    char buffer[10];
+	        int i = 0;
+		    if (n == 0) {
+			            write(2, "0", 1);
+				            return;
+					        }
+		        while (n > 0) {
+				        buffer[i++] = (n % 10) + '0';
+					        n /= 10;
+						    }
+			    while (--i >= 0)
+				            write(2, &buffer[i], 1);
 }

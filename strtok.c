@@ -55,13 +55,13 @@ char **parse(const char *cmd, const char *delim)
 	int i = 0;
 
 	tokens = malloc(strlen(cmd) * sizeof(char *));
-	str = malloc(sizeof(char) * sizeof(cmd));
-	strcpy(str, cmd);
+	/*str = malloc(sizeof(char) * sizeof(cmd));*/
+	str = strdup(cmd);
 
 	for (;; i++, str = NULL)
 
 	{
-		token = my_strtok(str, delim);
+		token = strtok(str, delim);
 		tokens[i] = token;/*strtok (str, delim);*/
 		if (token == NULL)
 		{
