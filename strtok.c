@@ -61,7 +61,7 @@ char **parse(const char *cmd, const char *delim)
 	for (;; i++, str = NULL)
 
 	{
-		token = strtok(str, delim);
+		token = my_strtok(str, delim);
 		tokens[i] = token;/*strtok (str, delim);*/
 		if (token == NULL)
 		{
