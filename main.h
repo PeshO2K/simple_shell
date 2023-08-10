@@ -79,6 +79,7 @@ char *find_file_in_path(var_t *vars);
 /*environ.c*/
 
 char *_getenv(var_t *vars, const char *name);
+char **copyenv(char **env);
 int _setenv(const char *name, const char *value, int overwrite);
 int _unsetenv(const char *name);
 

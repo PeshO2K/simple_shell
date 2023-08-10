@@ -24,7 +24,7 @@ void set_vars(var_t *vars, char **argv)
 
 	vars->myname = argv[0];
 	/*printf("NAme set, building path ...\n");*/
-	vars->PATH = build_path_list(vars);
+	/*vars->PATH = build_path_list(vars);*/
 	/*printf("path built\n");*/
 	if (vars->line)
 	{
@@ -88,9 +88,8 @@ void sigintHandler(__attribute__((unused))int sig_num)
  *
  * Return: 1 if interactive mode, 0 otherwise
  */
-int interactive(var_t *vars)
+int interactive(var_t __attribute__((__unused__)) *vars)
 {
-	(void) vars;
 	int mode;
 
 	mode = isatty(STDIN_FILENO);

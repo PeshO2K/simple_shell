@@ -31,7 +31,7 @@ int shell_loop(var_t *vars, char **argv)
 		signal(SIGINT,sigintHandler);
 		
 		/*printf("Bginning line reading \n");*/
-		r = my_getline(&(vars->line), &len, stdin);
+		r = getline(&(vars->line), &len, stdin);
 		/*printf("Success reading line\n");*/
 
 		if (buf != NULL)

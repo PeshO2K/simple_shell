@@ -46,7 +46,8 @@ int execute_cmd(var_t *vars)
 	if (vars->args[0] && (execute_builtin(vars) == -1))
 	{
 		vars->line_count++;
-		if (strncmp(vars->args[0], "/", 1) != 0)
+		/* checck if path is provided */
+		if ((vars->args[0][0] != '/')  && (vars->args[0][0] != '.'))
 		{
 			cmd_path = find_file_in_path(vars);
 
@@ -57,12 +58,12 @@ int execute_cmd(var_t *vars)
 		}
 		else
 		{
-			if (test_path(vars) == 0)
+			if (test_path(vars))
 			{
 				vars->path = vars->args[0];
 			}
 		}
-		if (vars->path)
+		if (vars->path && (isatty(STDIN_FILENO) || _getenv(vars,"PATH") || vars->args[0][0] == '/'))
 		{
 			return (do_fork(vars));
 		}
@@ -70,6 +71,7 @@ int execute_cmd(var_t *vars)
 		{
 			vars->e_status = 127;
 			print_error(vars, "not found\n");
+			exit(vars->e_status);
 		}
 	}
 	return (-1);
@@ -84,5 +86,7 @@ int test_path(var_t *vars)
 {
 	struct stat st;
 
-	return (stat(vars->args[0], &st));
+	stat(vars->args[0], &st);
+
+	return (S_ISREG(st.st_mode));
 }

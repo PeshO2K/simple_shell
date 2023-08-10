@@ -8,9 +8,8 @@
  * @environ: env variable
  * Return: 0 Success
  */
-int main(int argc, char **argv)
+int main(int __attribute__((__unused__)) argc, char **argv)
 {
-	(void) argc;
 	var_t vars [] = { VAR_INIT };
 	/*(void) vars;*/
 
@@ -18,7 +17,10 @@ int main(int argc, char **argv)
 
 	/*populate_env_list(info);*/
 	/*read_history(info);*/
-	vars->env = environ;
+	vars->env = copyenv(environ);
+	
+	vars->PATH = build_path_list(vars);
+
 	shell_loop(vars, argv);
 	return (EXIT_SUCCESS);
 }

@@ -22,3 +22,32 @@ char *_getenv(var_t *vars, const char *name)
 	}
 	return (NULL);
 }
+
+char **copyenv(char **env)
+{
+	char **newenv;
+	int i,j;
+
+	for (i = 0; env[i]; i++)
+	{
+		;
+	}
+
+	newenv = malloc((i + 1) * sizeof(char *));
+	if (newenv == NULL)
+	{
+		perror("newenv");
+		return (NULL);
+	}
+
+	for (j = 0; env[j]; j++)
+	{
+		newenv[j] = strdup(env[j]);
+	}
+	newenv[i] = NULL;
+
+	return (newenv);
+
+
+
+}
