@@ -28,10 +28,16 @@ char **copyenv(char **env)
 	char **newenv;
 	int i,j;
 
+	if (*env == NULL)
+	{
+		return (NULL);
+	}
+
 	for (i = 0; env[i]; i++)
 	{
 		;
 	}
+
 
 	newenv = malloc((i + 1) * sizeof(char *));
 	if (newenv == NULL)
@@ -40,11 +46,11 @@ char **copyenv(char **env)
 		return (NULL);
 	}
 
-	for (j = 0; env[j]; j++)
+	for (j = 0; j < i; j++)
 	{
 		newenv[j] = strdup(env[j]);
 	}
-	newenv[i] = NULL;
+	newenv[j] = NULL;
 
 	return (newenv);
 

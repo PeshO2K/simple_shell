@@ -35,6 +35,7 @@ int _my_env(var_t *vars)
 {
 	unsigned int i;
 
+	
 	for (i = 0; vars->env[i]; i++)
 	{
 		_puts(vars->env[i]);

@@ -8,11 +8,13 @@
 Node *build_path_list(var_t *vars)
 {
 	/*printf("Building path\n");*/
-	char *PATH = _getenv(vars, "PATH");
+	char *PATH =  _getenv(vars, "PATH");
+	Node *head = NULL;
+
+	if ( PATH){
 	char *path_cpy = strdup(PATH);
 	char *token = my_strtok(path_cpy, ":");
 
-	Node *head = NULL;
 
 	while (token)
 	{
@@ -20,6 +22,7 @@ Node *build_path_list(var_t *vars)
 		token = my_strtok(NULL, ":");
 	}
 	free(path_cpy);
+	}
 	/*printf("Path built!!\n");*/
 	return (head);
 }

@@ -32,6 +32,7 @@ int shell_loop(var_t *vars, char **argv)
 		
 		/*printf("Bginning line reading \n");*/
 		r = getline(&(vars->line), &len, stdin);
+
 		/*printf("Success reading line\n");*/
 
 		if (buf != NULL)
@@ -43,7 +44,7 @@ int shell_loop(var_t *vars, char **argv)
 		
 		if (r != -1)
 		{
-			/*rintf("Executing cmd \n");*/
+			
 			set_vars(vars, argv);
 			execute_cmd(vars);
 

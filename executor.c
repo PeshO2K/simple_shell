@@ -18,6 +18,10 @@ int do_fork(var_t *vars)
 		if (execve(vars->path, vars->args, vars->env) == -1)
 		{
 			print_error(vars, NULL);
+			if (errno == ENOENT)
+			{
+				exit(2);
+			}
 			return (-1);
 		}
 	}
@@ -29,6 +33,14 @@ int do_fork(var_t *vars)
 	else
 	{
 		wait(&status);
+		if (WIFEXITED(status))
+		{
+			status = WEXITSTATUS(status);
+			if (status == ENOENT)
+			{
+				exit(2);
+			}
+		}
 	}
 	return (0);
 }
@@ -63,7 +75,7 @@ int execute_cmd(var_t *vars)
 				vars->path = vars->args[0];
 			}
 		}
-		if (vars->path && (isatty(STDIN_FILENO) || _getenv(vars,"PATH") || vars->args[0][0] == '/'))
+		if (vars->path && (isatty(STDIN_FILENO) || (vars->PATH != NULL) || vars->args[0][0] == '/'))
 		{
 			return (do_fork(vars));
 		}
