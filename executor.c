@@ -61,7 +61,7 @@ int execute_cmd(var_t *vars)
 	
 
 
-	if (vars->args[0] && (execute_builtin(vars) == -1))
+	if (vars->args[0] && (execute_builtin(vars) == 1))
 	{
 		vars->line_count++;
 		/* checck if path is provided */

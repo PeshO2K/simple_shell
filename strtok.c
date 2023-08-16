@@ -72,3 +72,17 @@ char **parse(const char *cmd, const char *delim)
 	free(str);
 	return (tokens);
 }
+
+int _isalpha(char *s)
+{
+	while (*s)
+	{
+		if (((*s > 64) && (*s < 91)) || ((*s > 96) && (*s < 123)))
+		{
+			return (1);
+		}
+		s++;
+	}
+	return (0);
+
+}

@@ -6,24 +6,31 @@
  */
 int _my_exit(var_t *vars)
 {
-	int exit_status;
-
 	if (vars->args[1])
-	{
-		exit_status = _atoi(vars->args[1]);
-		if (exit_status == -1)
+	{ 
+		vars->e_status = _atoi(vars->args[1]);
+		if ((vars->e_status < 0) || (_isalpha(vars->args[1])))
 		{
+			/*printf("%d", vars->e_status);*/
 			vars->e_status = 2;
-			print_error(vars, ": Illegal number: ");
+			print_error(vars, "Illegal number: ");
 			_errputs(vars->args[1]);
 			_errputs("\n");
-			return (1);
 		}
-		vars->err_num = exit_status;
-		return (-2);
+		else if(vars->e_status > 255)
+		{
+			vars->e_status = 232;
+		}
+
+		
 	}
-	vars->err_num = -1;
-	return (-2);
+	else 
+	{
+		vars->e_status = EXIT_SUCCESS;
+	}
+	exit(vars->e_status);
+	return (0);
+	
 }
 
 /**
@@ -46,6 +53,28 @@ int _my_env(var_t *vars)
 }
 
 /**
+ *  * _my_alias - finds alias of fxn
+ *   *@vars: takes arguments
+ *    * Return: 0 on sucess and -1 failure
+ *     */
+int _my_alias(var_t *vars)
+{
+	        (void) vars;
+		        return (0);
+}
+
+/**
+ *  * _my_cd - changes working directory
+ *   *@vars: takes arguments
+ *    * Return: 0 on sucess and -1 failure
+ *     */
+int _my_cd(var_t *vars)
+{
+	        (void) vars;
+		        return (0);
+}
+
+/**
  * execute_builtin - finds and execute builtin fxn
  *@vars: takes arguments
  * Return: 0 on success -1 on failure
@@ -58,6 +87,8 @@ int execute_builtin(var_t *vars)
 		{"env", _my_env},
 		{"cd", _my_cd},
 		{"alias", _my_alias},
+		{"setenv", _setenv},
+		{"unsetenv", _unsetenv},
 		{NULL, NULL}
 };
 	int i = 0;
@@ -72,27 +103,5 @@ int execute_builtin(var_t *vars)
 		}
 	}
 	/*printf("\nI am not a builtin\n");*/
-	return (-1);
-}
-
-/**
- * _my_alias - finds alias of fxn
- *@vars: takes arguments
- * Return: 0 on sucess and -1 failure
- */
-int _my_alias(var_t *vars)
-{
-	(void) vars;
-	return (0);
-}
-
-/**
- * _my_cd - changes working directory
- *@vars: takes arguments
- * Return: 0 on sucess and -1 failure
- */
-int _my_cd(var_t *vars)
-{
-	(void) vars;
-	return (0);
+	return (1);
 }

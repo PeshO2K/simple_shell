@@ -19,7 +19,7 @@ void reset_vars(var_t *vars)
  */
 void set_vars(var_t *vars, char **argv)
 {
-	/*int i = 0;*/
+	int i = 0;
 	/*printf("\nsetting variables ...\n");*/
 
 	vars->myname = argv[0];
@@ -39,9 +39,9 @@ void set_vars(var_t *vars, char **argv)
 				vars->args[1] = NULL;
 			}
 		}
-		/*for (i = 0; vars->argv && vars->argv[i]; i++)*/
-		/*	;*/
-		/*info->argc = i;*/
+		for (i = 0; vars->args && vars->args[i]; i++)
+				;
+		vars->argsc = i;
 
 		/*replace_alias(info);*/
 		/*replace_vars(info);*/

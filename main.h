@@ -17,7 +17,7 @@
 
 #define DELIM " \n\t\r\a"
 #define VAR_INIT \
-{NULL, NULL, NULL, NULL, NULL, NULL, \
+{NULL, NULL, 0, NULL, NULL, NULL, NULL, \
 	0, 0, 0, 0}
 
 
@@ -54,6 +54,7 @@ typedef struct my_variables
 {
 	char *myname;
 	char *line;
+	int argsc;
 	char **args;
 	char **env;
 	char *path;
@@ -75,14 +76,6 @@ size_t list_len(const Node *head);
 Node *build_path_list(var_t *vars);
 char *find_file_in_path(var_t *vars);
 
-
-/*environ.c*/
-
-char *_getenv(var_t *vars, const char *name);
-char **copyenv(char **env);
-int _setenv(const char *name, const char *value, int overwrite);
-int _unsetenv(const char *name);
-
 /*builtin*/
 /**
  * struct builtin_t - singly linked list
@@ -98,11 +91,17 @@ typedef struct builtin_t
 } builtin_t;
 
 int _my_exit(var_t *vars);
-int _my_env(var_t *vars);
 int _my_cd(var_t *vars);
 int _my_alias(var_t *vars);
 int execute_builtin(var_t *vars);
 
+/*environ.c*/
+int _my_env(var_t *vars);
+char *_getenv(var_t *vars, const char *name);
+char **copyenv(char **env);
+int _setenv(var_t *vars);
+int _unsetenv(var_t *vars);
+int _putenv(char *env_var, var_t *vars);
 
 /*handler.c*/
 void _errputs(char *str);
@@ -115,12 +114,16 @@ void print_unsigned_int(unsigned int n);
 int do_fork(var_t *vars);
 int execute_cmd(var_t *vars);
 int test_path(var_t *vars);
+
+
 /*strtok*/
 char *my_strtok(char *str, const char *delim);
 ssize_t my_getline(char **store, size_t *input_len, FILE *stream);
 char **handle_separator(char *input);
 char **split_string(char *str, int *num_words, char *delim);
 char **parse(const char *cmd, const char *delim);
+int _isalpha(char *s);
+
 /*memory.c*/
 void ffree(char **pp);
 
