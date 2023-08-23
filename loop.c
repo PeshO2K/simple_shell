@@ -11,12 +11,9 @@ int shell_loop(var_t *vars, char **argv)
 	ssize_t r = 0;
 	size_t len = 0;
 	int mode;
-	char *buf = NULL; 
 	
 
 	mode = isatty(STDIN_FILENO);
-	/*printf("\n In loop, mode: %d\n", mode);*/
-	
 
 	while(r != -1)
 	{
@@ -35,22 +32,19 @@ int shell_loop(var_t *vars, char **argv)
 
 		/*printf("Success reading line\n");*/
 
-		if (buf != NULL)
-		{
-			printf ("Printing buffer\n");
-			printf("%s\n",buf);
-			return (0);
-		}
 		
 		if (r != -1)
 		{
 			
 			set_vars(vars, argv);
+			/*handle command separators here**/
 			execute_cmd(vars);
 
 		}
 		
 	}
+
+	free_vars(vars, 1);
 
 	return (0);
 }

@@ -55,20 +55,19 @@ void set_vars(var_t *vars, char **argv)
  */
 void free_vars(var_t *vars, int all)
 {
-	ffree(vars->args);
-	vars->args= NULL;
+	/* don't forget to free args*/
+	/*vars->args= NULL;*/
 	vars->path = NULL;
 	if (all)
 	{
 		free(vars->line);
 		if (vars->PATH)
+		{
 			free_list(vars->PATH);
+		}
 
-		ffree(vars->env);
-		vars->env = NULL;
-
-
-		
+		ffree(&(vars->env));
+		/*vars->env = NULL;*/
 	}
 }
 /**

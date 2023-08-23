@@ -93,15 +93,20 @@ typedef struct builtin_t
 int _my_exit(var_t *vars);
 int _my_cd(var_t *vars);
 int _my_alias(var_t *vars);
+int _my_setenv(var_t *vars);
+int _my_unsetenv(var_t *vars);
 int execute_builtin(var_t *vars);
 
 /*environ.c*/
 int _my_env(var_t *vars);
 char *_getenv(var_t *vars, const char *name);
 char **copyenv(char **env);
-int _setenv(var_t *vars);
-int _unsetenv(var_t *vars);
+int _setenv(var_t *vars, char *name, char *value);
+int _unsetenv(var_t *vars, char *name);
 int _putenv(char *env_var, var_t *vars);
+
+/*env_utils.c*/
+int _chdir(var_t *vars, char *new_pwd);
 
 /*handler.c*/
 void _errputs(char *str);
@@ -125,7 +130,7 @@ char **parse(const char *cmd, const char *delim);
 int _isalpha(char *s);
 
 /*memory.c*/
-void ffree(char **pp);
+void ffree(char ***pp);
 
 /*string.c*/
 int _strlen(char *s);

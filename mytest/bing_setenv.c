@@ -78,3 +78,31 @@ int my_unsetenv(const char *name) {
 	return 0;
 }
 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+
+int main(int argc, char **argv) {
+	char *home = getenv("HOME");
+	char *oldpwd = getenv("OLDPWD");
+	char *pwd = getenv("PWD");
+	if (argc == 1) {
+		chdir(home);
+		setenv("OLDPWD", pwd, 1);
+		setenv("PWD", home, 1);
+	} else if (strcmp(argv[1], "-") == 0) {
+								            if (oldpwd != NULL) {
+										                chdir(oldpwd);
+												            setenv("OLDPWD", pwd, 1);
+													                setenv("PWD", oldpwd, 1);
+															        }
+									        } else {
+											        chdir(argv[1]);
+												        setenv("OLDPWD", pwd, 1);
+													        setenv("PWD", argv[1], 1);
+														    }
+			    return 0;
+}
+

@@ -66,60 +66,33 @@ char **copyenv(char **env)
  * _setenv - adds or changes environment variable
  * @name: env variable name
  * @value: new value
- * @overwrite: flag to overwrite existing value
  * Return: -1 on failure, 0 on success
  */
-int _setenv(var_t *vars)
+int _setenv(var_t *vars, char *name, char *value)
 {
-	/* make copies of name and value;
-	 * use memcpy?
-	 * malloc / calloc;
-	 *
-	 *
-	 * if (!name || strlen(name) == 0 || strchr(name, '=') == 0)
-	 * 	set errno = EINVAL;
-	 * 	return (-1);
-	 * If name exists && overwrite != 0:
-	 * 	update value of name;
-	 * elif (!name)
-	 * 	add name;
-	 * 	on error:
-	 * 	set errno = ENOMEM;
-	 * 	return (-1);
-	 *
-	 * return 0;
-	 * */
 	char *env_var, *curr_val;
-	size_t name_len, value_len;
 
-	/*Check for incorrect number of variables*/
-	if (vars->argsc != 3)
-	{
-		print_error(vars, "Usage: setenv VARIABLE VALUE");
-		return (-1);
-	}
-	/*printf("In setenv\n");*/
-	name_len = strlen(vars->args[1]);
-	value_len = strlen(vars->args[2]);
+	size_t name_len = strlen(name);
+	size_t value_len = strlen(value);
 
 	/* if name is NULL or of zero length or contains '=' return error*/
-	if (!(vars->args[1]) || (name_len == 0) || (strchr(vars->args[1], '=')))
+	if (!(name) || (name_len == 0) || (strchr(name, '=')))
 	{
 		/*printf("error here\n");*/
 		/* set errno EINVAL here*/
 		return (-1);
 	}
 	/*printf("Checking if variable exists\n");*/
-	curr_val = _getenv(vars, vars->args[1]); /*return address of current value of name*/
+	curr_val = _getenv(vars, name); /*return address of current value of name*/
 	env_var = malloc(name_len + value_len + 2);
-	memcpy(env_var, vars->args[1], name_len);
+	memcpy(env_var, name, name_len);
 	env_var[name_len] = '=';
-	memcpy(env_var + name_len + 1, vars->args[2], value_len);
+	memcpy(env_var + name_len + 1, value, value_len);
 
 	
 	
 	/*if found and values do not match, update*/
-	if (curr_val && (strcmp(curr_val, vars->args[2]) != 0))
+	if (curr_val && (strcmp(curr_val, value) != 0))
 	{
 		/*printf("It exists\n");*/
 		/*update the row here and not the first address
@@ -147,7 +120,7 @@ int _setenv(var_t *vars)
 		/*Handle error here*/
 		/*_my_env(vars);*/
 	}
-	
+	free (env_var);
 
 	return (0);
 }
@@ -169,7 +142,10 @@ int _putenv(char *env_var, var_t *vars)
 		;
 	}
 	/*printf("env_len: %lu\n", env_len);*/
-	new_env = malloc((env_len + 2) * sizeof(char **));
+	if (!(new_env = malloc((env_len + 2) * sizeof(char **))))
+	{
+		return (-1);
+	}
 	/*handle error here*/
 
 	memcpy(new_env, vars->env, env_len * sizeof (char *));
@@ -194,35 +170,19 @@ int _putenv(char *env_var, var_t *vars)
  * @vars: struct containing variables
  * Return: 0 on success, -1 on error. 
  */
-int _unsetenv(var_t *vars)
+int _unsetenv(var_t *vars, char *name)
 {
 	char *curr_val;
-	size_t env_len, idx = 0;
+	size_t idx = 0;
 
-	/*printf("in unsetenv\n");*/
-
-
-	if (vars->argsc != 2)
-	{
-		 print_error(vars, "Usage: unsetenv VARIABLE ");
-		 return (-1);
-	}
-
-	curr_val = _getenv(vars, vars->args[1]);
+	curr_val = _getenv(vars, name);
 	if (curr_val)
 	{
 		/* point to start of the string*/
-		curr_val = curr_val - (strlen(vars->args[1])) - 1;
-		for (env_len = 0; vars->env[env_len]; env_len++)
-		{
-			;
-		}
+		curr_val = curr_val - (strlen(name)) - 1;
 
 		while(vars->env[idx] != curr_val)
 		{
-			
-			/*rintf("env address: %p, ptr address: %p , curr_val address: %p\n", (void *)vars->env++, (void *)ptr, (void *)curr_val);
-			printf("env: %s, ptr: %s\n\n", *(vars->env), *ptr);*/
 			idx++;
 		}
 		
@@ -230,8 +190,6 @@ int _unsetenv(var_t *vars)
 		{
 			vars->env[idx] = vars->env[idx + 1];
 		}
-
-		/*printf("env_var at idx %lu: %s\n", idx, vars->env[idx]);*/
 		
 	}
 
