@@ -18,9 +18,10 @@ int do_fork(var_t *vars)
 		if (execve(vars->path, vars->args, vars->env) == -1)
 		{
 			print_error(vars, NULL);
+
 			if (errno == ENOENT)
 			{
-				exit(2);
+				vars->e_status = 2;
 			}
 			return (-1);
 		}
@@ -38,13 +39,14 @@ int do_fork(var_t *vars)
 			status = WEXITSTATUS(status);
 			if (status == ENOENT)
 			{
-				exit(2);
+				vars->e_status = 2;
 			}
 		}
 		return (0);
 	}
 	print_error(vars, NULL);
-	exit(127);
+	vars->e_status = 127;
+	return (-1);
 
 	
 }
@@ -56,7 +58,7 @@ int do_fork(var_t *vars)
  */
 int execute_cmd(var_t *vars)
 {
-	char *cmd_path;
+	/*char *cmd_path;*/
 	int a,b,c,d;
 	
 
@@ -67,12 +69,10 @@ int execute_cmd(var_t *vars)
 		/* checck if path is provided */
 		if ((vars->args[0][0] != '/')  && (vars->args[0][0] != '.'))
 		{
-			cmd_path = find_file_in_path(vars);
+			/*cmd_path = find_file_in_path(vars);*/
 
-			if (cmd_path)
-			{
-				vars->path = cmd_path;
-			}
+			vars->path = find_file_in_path(vars);
+			
 		}
 		else
 		{
@@ -80,11 +80,11 @@ int execute_cmd(var_t *vars)
 			{
 				vars->path = vars->args[0];
 			}
-			else
+			/*else
 			{
 				print_error(vars, "not found\n");
 				exit (127);
-			}
+			}*/
 		}
 		a = ((access(vars->path, X_OK) == 0) && (vars->path != NULL));
 		b = isatty(STDIN_FILENO);
@@ -99,9 +99,10 @@ int execute_cmd(var_t *vars)
 		}
 		else
 		{
+			/*vars->err_num = ENOENT;*/
 			vars->e_status = 127;
 			print_error(vars, "not found\n");
-			exit(vars->e_status);
+			/*exit(vars->e_status);*/
 		}
 	}
 	return (-1);

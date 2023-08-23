@@ -24,10 +24,10 @@ int _my_exit(var_t *vars)
 
 		
 	}
-	else 
+	/*else 
 	{
 		vars->e_status = EXIT_SUCCESS;
-	}
+	}*/
 	free_vars(vars, 1);
 	exit(vars->e_status);
 	printf("Exited\n");

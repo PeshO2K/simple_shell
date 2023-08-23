@@ -11,6 +11,7 @@ int shell_loop(var_t *vars, char **argv)
 	ssize_t r = 0;
 	size_t len = 0;
 	int mode;
+	int count = 0;
 	
 
 	mode = isatty(STDIN_FILENO);
@@ -18,6 +19,9 @@ int shell_loop(var_t *vars, char **argv)
 	while(r != -1)
 	{
 		reset_vars(vars);
+		count++;
+
+		/*printf("\t loop number: %u, r = %lu\n ", count, r);*/
 
 		if (mode == 1)
 		{
@@ -43,8 +47,16 @@ int shell_loop(var_t *vars, char **argv)
 		}
 		
 	}
-
+	/*if (r == EOF)
+	{
+		_puts("\n");
+	}*/
 	free_vars(vars, 1);
+	
+	if (vars->e_status)
+	{
+		exit(vars->e_status);
+	}
 
 	return (0);
 }
