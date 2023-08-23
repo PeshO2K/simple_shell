@@ -95,7 +95,7 @@ int _isalpha(char *s)
  * @str: string to copy
  * Return: pointer of an array of chars
  */
-char *_strdup(char *str)
+char *_strdup(const char *str)
 {
 	char *str2 = malloc(_strlen(str) + 1);
 	

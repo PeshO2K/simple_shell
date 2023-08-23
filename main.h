@@ -126,7 +126,7 @@ char *my_strtok(char *str, const char *delim);
 char **parse(const char *cmd, const char *delim);
 int _isalpha(char *s);
 void *_memcpy(void *dest, void *src, size_t n);
-char *_strdup(char *str);
+char *_strdup(const char *str);
 
 
 /*removed*/
@@ -142,7 +142,7 @@ size_t _strlen(const char *s);
 int _putchar(char c);
 void _puts(char *str);
 int _atoi(char *s);
-char *_strcpy(char *dest, char *src);
+char *_strcpy(char *dest, const char *src);
 
 /*string2.c*/
 char *_strchr(const char *s, int c);
