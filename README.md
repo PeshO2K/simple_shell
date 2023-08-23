@@ -58,8 +58,3 @@ The project consists of the following files:
 - main.c: Contains the main function that initializes, loops, and terminates the shell program.
 - parser.c: Contains the functions that parse the input line into tokens, handle special characters, logical operators, separators, etc., and use the custom strtok function.
 
-# Contributors
-
-This project was created by:
-
-- olaidris <olasunkanmiidris15@gmail.com>
