@@ -33,7 +33,7 @@ Node *new_node(const char *data)
 		return (NULL);
 	}
 
-	node->data = strdup(data);
+	node->data = _strdup(data);
 	node->next = NULL;
 	return (node);
 }

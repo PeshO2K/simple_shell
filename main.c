@@ -1,6 +1,4 @@
 #include "main.h"
-
-
 /**
  * main - Entry point
  * @argc: number of arguments

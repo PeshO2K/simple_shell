@@ -2,7 +2,7 @@
 
 /**
  * do_fork - creates child process and executes command
- * @vars: var struct arguments
+ * @vars: global variables struct
  * Return: 0 on success and -1 on failure
  */
 int do_fork(var_t *vars)
@@ -51,9 +51,8 @@ int do_fork(var_t *vars)
 	
 }
 /**
- * execute_cmd - creates child process and executes command
- * @vars: var struct arguments
- *
+ * execute_cmd - executes command
+ * @vars: global variables struct
  * Return: 0 on success and -1 on failure
  */
 int execute_cmd(var_t *vars)
@@ -110,7 +109,7 @@ int execute_cmd(var_t *vars)
 
 /**
  * test_path - test path provided
- * @vars: arguments
+ * @vars: global variables struct
  * Return: 0 on success and -1 on failure
  */
 int test_path(var_t *vars)

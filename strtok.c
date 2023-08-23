@@ -20,7 +20,7 @@ char *my_strtok(char *str, const char *delim)
 	{
 		return (NULL);
 	}
-	while (*next && strchr(delim, *next))
+	while (*next && _strchr(delim, *next))
 	{
 		next++;
 	}
@@ -29,7 +29,7 @@ char *my_strtok(char *str, const char *delim)
 		return (NULL);
 	}
 	start = next;
-	while (*next && !strchr(delim, *next))
+	while (*next && !_strchr(delim, *next))
 	{
 		next++;
 	}
@@ -54,9 +54,9 @@ char **parse(const char *cmd, const char *delim)
 	char *token, *str;
 	int i = 0;
 
-	tokens = malloc(strlen(cmd) * sizeof(char *));
+	tokens = malloc(_strlen(cmd) * sizeof(char *));
 	/*str = malloc(sizeof(char) * sizeof(cmd));*/
-	str = strdup(cmd);
+	str = _strdup(cmd);
 
 	for (;; i++, str = NULL)
 
@@ -72,7 +72,11 @@ char **parse(const char *cmd, const char *delim)
 	free(str);
 	return (tokens);
 }
-
+/**
+ * _isalpha - if string is alphabet
+ * @s: string
+ * Return: 1 if true and 0 false
+ */
 int _isalpha(char *s)
 {
 	while (*s)
@@ -85,4 +89,42 @@ int _isalpha(char *s)
 	}
 	return (0);
 
+}
+/**
+ * _strdup - returns a pointer to a newly allocated space in memory
+ * @str: string to copy
+ * Return: pointer of an array of chars
+ */
+char *_strdup(char *str)
+{
+	char *str2 = malloc(_strlen(str) + 1);
+	
+	if (str2 == NULL)
+	{
+		return (NULL);
+	}
+	
+	_strcpy(str2, str);
+	return (str2);
+}
+/**
+ * _memcpy - copies n bytes from src to dest
+ * @n: no of bytes
+ * @src: source
+ * @dest: destination
+ * Return: dest
+ */
+void *_memcpy(void *dest, void *src, size_t n)
+{
+	size_t i;
+
+	char *cdest = (char *)dest;
+	char *csrc = (char *)src;
+
+
+	for (i = 0; i < n; i++)
+	{
+		cdest[i] = csrc[i];
+	}
+	return (dest);
 }

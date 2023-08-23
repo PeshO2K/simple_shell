@@ -1,21 +1,21 @@
 #include "main.h"
 /**
  * _getenv - finds environment variable
- *@name: env variable name
- *@vars: struct address
+ * @name: env variable name
+ * @vars: struct address
  * Return: NULL on failure ,pointer value success
  */
 char *_getenv(var_t *vars, const char *name)
 {
 	/*printf("getting emvironment variable\n");*/
 	char **s = vars->env;
-	size_t len = strlen(name);
+	size_t len = _strlen(name);
 
 	/*printf("starting for loop...\n");*/
 
 	for (; *s; s++)
 	{
-		if ((strncmp(name, *s, len) == 0) && ((*s)[len] == '='))
+		if ((_strncmp(name, *s, len) == 0) && ((*s)[len] == '='))
 		{
 			return (*s + len + 1);
 		}
@@ -23,11 +23,11 @@ char *_getenv(var_t *vars, const char *name)
 	return (NULL);
 }
 /**
- *  * _getenv - finds environment variable
- *   *@name: env variable name
- *    *@vars: struct address
- *     * Return: NULL on failure pointer on sucess
- *      */
+ * copyenv - copy environment
+ * @env: environment
+ * 
+ * Return: NULL on failure pointer on sucess
+ */
 char **copyenv(char **env)
 {
 	char **newenv;
@@ -53,7 +53,7 @@ char **copyenv(char **env)
 
 	for (j = 0; j < i; j++)
 	{
-		newenv[j] = strdup(env[j]);
+		newenv[j] = _strdup(env[j]);
 	}
 	newenv[j] = NULL;
 
@@ -64,6 +64,7 @@ char **copyenv(char **env)
 }
 /**
  * _setenv - adds or changes environment variable
+ * @vars: global variables struct
  * @name: env variable name
  * @value: new value
  * Return: -1 on failure, 0 on success
@@ -72,11 +73,11 @@ int _setenv(var_t *vars, char *name, char *value)
 {
 	char *env_var, *curr_val;
 
-	size_t name_len = strlen(name);
-	size_t value_len = strlen(value);
+	size_t name_len = _strlen(name);
+	size_t value_len = _strlen(value);
 
 	/* if name is NULL or of zero length or contains '=' return error*/
-	if (!(name) || (name_len == 0) || (strchr(name, '=')))
+	if (!(name) || (name_len == 0) || (_strchr(name, '=')))
 	{
 		/*printf("error here\n");*/
 		/* set errno EINVAL here*/
@@ -85,20 +86,20 @@ int _setenv(var_t *vars, char *name, char *value)
 	/*printf("Checking if variable exists\n");*/
 	curr_val = _getenv(vars, name); /*return address of current value of name*/
 	env_var = malloc(name_len + value_len + 2);
-	memcpy(env_var, name, name_len);
+	_memcpy(env_var, name, name_len);
 	env_var[name_len] = '=';
-	memcpy(env_var + name_len + 1, value, value_len);
+	_memcpy(env_var + name_len + 1, value, value_len);
 
 	
 	
 	/*if found and values do not match, update*/
-	if (curr_val && (strcmp(curr_val, value) != 0))
+	if (curr_val && (_strcmp(curr_val, value) != 0))
 	{
 		/*printf("It exists\n");*/
 		/*update the row here and not the first address
 		 * avoid pointer decay*/
 		curr_val = curr_val - name_len - 1;
-		memcpy(curr_val, env_var, name_len + value_len + 2);
+		_memcpy(curr_val, env_var, name_len + value_len + 2);
 		/* Handle error here
 		 * return (-1);*/
 	}/*The variable does not exist add it*/
@@ -127,6 +128,7 @@ int _setenv(var_t *vars, char *name, char *value)
 /**
  * _putenv - adds new element to the environment
  * @env_var: the variable to be added
+ * @vars: global variables struct
  * Return: 0 on success, -1 on error.
  */
 int _putenv(char *env_var, var_t *vars)
@@ -148,7 +150,7 @@ int _putenv(char *env_var, var_t *vars)
 	}
 	/*handle error here*/
 
-	memcpy(new_env, vars->env, env_len * sizeof (char *));
+	_memcpy(new_env, vars->env, env_len * sizeof (char *));
 
 	for (idx = 0; new_env[idx]; idx++)
 	{
@@ -179,7 +181,7 @@ int _unsetenv(var_t *vars, char *name)
 	if (curr_val)
 	{
 		/* point to start of the string*/
-		curr_val = curr_val - (strlen(name)) - 1;
+		curr_val = curr_val - (_strlen(name)) - 1;
 
 		while(vars->env[idx] != curr_val)
 		{

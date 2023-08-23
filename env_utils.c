@@ -1,5 +1,10 @@
 #include "main.h"
-
+/**
+ * _chdir - changes working directory
+ * @vars: global variables struct
+ * @new_pwd: new working directory
+ * Return: 0 success, -1 on error
+ */
 int _chdir(var_t *vars, char *new_pwd)
 {
 	char *new_oldpwd = _getenv(vars, "PWD");
@@ -7,9 +12,9 @@ int _chdir(var_t *vars, char *new_pwd)
 
 	if (chdir(new_pwd) == -1)
 	{
-		emsg = malloc((strlen(cd_msg) + strlen(new_pwd)) * sizeof(char *));
-		memcpy(emsg, cd_msg, strlen(cd_msg));
-		memcpy(emsg + strlen(cd_msg), new_pwd, strlen(new_pwd));
+		emsg = malloc((strlen(cd_msg) + _strlen(new_pwd)) * sizeof(char *));
+		_memcpy(emsg, cd_msg, _strlen(cd_msg));
+		_memcpy(emsg + _strlen(cd_msg), new_pwd, _strlen(new_pwd));
 		print_error(vars, emsg);
 		_errputs("\n");
 		free(emsg);

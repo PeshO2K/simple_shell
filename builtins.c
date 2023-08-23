@@ -1,8 +1,8 @@
 #include "main.h"
 /**
  * _my_exit - implements exit and arguments
- *@vars: takes arguments
- * Return: Exit status
+ * @vars: global variables struct
+ * Return: 0
  */
 int _my_exit(var_t *vars)
 {
@@ -30,14 +30,13 @@ int _my_exit(var_t *vars)
 	}*/
 	free_vars(vars, 1);
 	exit(vars->e_status);
-	printf("Exited\n");
 	return (0);
 	
 }
 
 /**
  * _my_env - prints environment variables
- *@vars: takes arguments
+ * @vars: global variables struct
  * Return: 0 always
  */
 int _my_env(var_t *vars)
@@ -55,10 +54,10 @@ int _my_env(var_t *vars)
 }
 
 /**
- *  * _my_alias - finds alias of fxn
- *   *@vars: takes arguments
- *    * Return: 0 on sucess and -1 failure
- *     */
+ * _my_alias - finds alias of fxn
+ * @vars: global variables struct
+ * Return: 0 on sucess and -1 failure
+ */
 int _my_alias(var_t *vars)
 {
 	        (void) vars;
@@ -66,10 +65,10 @@ int _my_alias(var_t *vars)
 }
 
 /**
- *  * _my_cd - changes working directory
- *   *@vars: takes arguments
- *    * Return: 0 on sucess and -1 failure
- *     */
+ * _my_cd - changes working directory
+ * @vars: global variables struct
+ * Return: 0 on sucess and -1 failure
+ */
 int _my_cd(var_t *vars)
 {
 	char *dir_path;
@@ -83,7 +82,7 @@ int _my_cd(var_t *vars)
 		/*_setenv (vars, "PWD", home);
 		_setenv (vars, "OLDPWD", pwd);*/
 	} 
-	else if (strcmp(vars->args[1],"-") == 0)
+	else if (_strcmp(vars->args[1],"-") == 0)
 	{
 		if (!(dir_path = _getenv(vars, "OLDPWD")))
 		{
@@ -110,12 +109,11 @@ int _my_cd(var_t *vars)
 
 /**
  * execute_builtin - finds and execute builtin fxn
- *@vars: takes arguments
+ * @vars: global variables struct
  * Return: 0 on success -1 on failure
  */
 int execute_builtin(var_t *vars)
 {
-
 	builtin_t builtins[] = {
 		{"exit", _my_exit},
 		{"env", _my_env},
@@ -127,15 +125,13 @@ int execute_builtin(var_t *vars)
 };
 	int i = 0;
 
-	/*printf("\nIn builtins\n");*/
 	for (; builtins[i].name; i++)
 	{
-		if (strcmp(vars->args[0], builtins[i].name) == 0)
+		if (_strcmp(vars->args[0], builtins[i].name) == 0)
 		{
 			vars->line_count++;
 			return (builtins[i].func(vars));
 		}
 	}
-	/*printf("\nI am not a builtin\n");*/
 	return (1);
 }

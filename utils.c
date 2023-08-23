@@ -2,6 +2,7 @@
 /**
  * reset_vars- initializes var_t struct
  * @vars: struct address
+ * Return: nothing
  */
 void reset_vars(var_t *vars)
 {
@@ -16,6 +17,7 @@ void reset_vars(var_t *vars)
  * set_vars - initializes reset_vars struct
  * @vars: struct address
  * @argv: argument vector
+ * Return: nothing
  */
 void set_vars(var_t *vars, char **argv)
 {
@@ -35,7 +37,7 @@ void set_vars(var_t *vars, char **argv)
 			vars->args = malloc(sizeof(char *) * 2);
 			if (vars->args)
 			{
-				vars->args[0] = strdup(vars->line);
+				vars->args[0] = _strdup(vars->line);
 				vars->args[1] = NULL;
 			}
 		}
@@ -52,6 +54,7 @@ void set_vars(var_t *vars, char **argv)
  * free_vars - frees var_t struct fields
  * @vars: struct address
  * @all: true if freeing all fields
+ * Return: nothing
  */
 void free_vars(var_t *vars, int all)
 {

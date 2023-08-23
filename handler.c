@@ -75,18 +75,28 @@ char *_uitoa(unsigned int count)
 	_puts(numstr);
 	return (numstr);
 }
+/**
+ * print_unsigned_int - prints unsigned int
+ * @count: unsigned int to convert
+ * Return: nothing
+ */
 void print_unsigned_int(unsigned int n) 
 {
-	    char buffer[10];
-	        int i = 0;
-		    if (n == 0) {
-			            write(2, "0", 1);
-				            return;
-					        }
-		        while (n > 0) {
-				        buffer[i++] = (n % 10) + '0';
-					        n /= 10;
-						    }
-			    while (--i >= 0)
-				            write(2, &buffer[i], 1);
+	char buffer[10];
+	int i = 0;
+
+	if (n == 0)
+	{
+		write(2, "0", 1);
+		return;
+	}
+	while (n > 0)
+	{
+		buffer[i++] = (n % 10) + '0';
+		n /= 10;
+	}
+	while (--i >= 0)
+	{
+		write(2, &buffer[i], 1);
+	}
 }

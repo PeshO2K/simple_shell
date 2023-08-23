@@ -69,13 +69,13 @@ int _strcmp(char *s1, char *s2)
  * @s: character string
  * Return: NULL if not found otherwise pointer.
  */
-char *_strchr(char *s, char c)
+char *_strchr(const char *s, int c)
 {
 	while (*s >= '\0')
 	{
-		if (*s == c)
+		if (*s == (char)c)
 		{
-			return (s);
+			return ((char *)s);
 		}
 		s++;
 	}
@@ -91,7 +91,7 @@ char *_strchr(char *s, char c)
  *         If str1 == str2, 0.
  *         If str1 > str2, the positive difference
  */
-int _strncmp(char *s1, char *s2, size_t n)
+int _strncmp(const char *s1, const char *s2, size_t n)
 {
 	while (n && *s1 && *s2 && *s1 == *s2)
 	{
