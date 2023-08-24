@@ -24,3 +24,30 @@ int _chdir(var_t *vars, char *new_pwd)
 	_setenv(vars, "PWD", new_pwd);
 	return (0);
 }
+/**
+ * count_tokens - return number of tokens
+ * @cmd: the command
+ * @delim: the delimiters
+ * Return: count
+ */
+int count_tokens(const char *cmd, const char *delim)
+{
+	int count = 0;
+	char *str, *token;
+
+	str = _strdup(cmd);
+	for (;; str = NULL)
+	{
+		token = my_strtok(str, delim);
+		if (token == NULL)
+		{
+			break;
+		}
+		else
+		{
+			count++;
+		}
+	}
+	free(str);
+	return (count);
+}

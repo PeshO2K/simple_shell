@@ -53,8 +53,9 @@ char **parse(const char *cmd, const char *delim)
 	char **tokens; /*[];*/
 	char *token, *str;
 	int i = 0;
+	int size = 10;
 
-	tokens = malloc(_strlen(cmd) * sizeof(char *));
+	tokens = malloc((size + 1) * sizeof(char *));
 	/*str = malloc(sizeof(char) * sizeof(cmd));*/
 	str = _strdup(cmd);
 
@@ -62,13 +63,18 @@ char **parse(const char *cmd, const char *delim)
 
 	{
 		token = my_strtok(str, delim);
-		tokens[i] = token;/*strtok (str, delim);*/
+		/*tokens[i] = _strdup(token);*//*strtok (str, delim);*/
 		if (token == NULL)
 		{
 			break;
 		}
-		/* printf("arg[%d] -> %s\n",i,tokens[i]);*/
+		else
+		{
+			tokens[i] = _strdup(token);
+		}
 	}
+	tokens[i] = NULL;
+
 	free(str);
 	return (tokens);
 }
@@ -97,14 +103,21 @@ int _isalpha(char *s)
  */
 char *_strdup(const char *str)
 {
-	char *str2 = malloc(_strlen(str) + 1);
-	
-	if (str2 == NULL)
+	size_t len;
+	char *str2;
+
+	if (str == NULL)
 	{
 		return (NULL);
 	}
-	
-	_strcpy(str2, str);
+
+	len = _strlen(str) + 1;
+	str2 = malloc(len);
+
+	if (str2)
+	{
+		_memcpy(str2, str, len);
+	}
 	return (str2);
 }
 /**
@@ -114,7 +127,7 @@ char *_strdup(const char *str)
  * @dest: destination
  * Return: dest
  */
-void *_memcpy(void *dest, void *src, size_t n)
+void *_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t i;
 

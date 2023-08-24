@@ -45,6 +45,7 @@ int shell_loop(var_t *vars, char **argv)
 			execute_cmd(vars);
 
 		}
+		free_vars(vars, 0);
 		
 	}
 	/*if (r == EOF)

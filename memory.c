@@ -5,9 +5,24 @@
  * @pp: string of strings
  * Return: nothing
  */
-void ffree(char ***pp)
+void ffree(char **pp)
 {
-	/*char **a = pp;*/
+	int i;
+	if (!pp)
+	{
+		return;
+	}
+	for (i = 0; pp[i]; i++)
+	{
+		free(pp[i]);
+	}
+	free(pp);
+	/*while (*pp)
+	{
+		free(*pp++);
+	}
+	free(a);
+	
 	int i = 0;
 	while(*pp && (*pp)[i] != NULL)
 	{
@@ -15,11 +30,5 @@ void ffree(char ***pp)
 		i++;
 	}
 	free(*pp);
-	/*
-
-	if (!pp)
-		return;
-	while (*pp)
-		free(*pp++);
-	free(a);*/
+	*/
 }

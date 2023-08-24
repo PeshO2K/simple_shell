@@ -107,6 +107,7 @@ int _putenv(char *env_var, var_t *vars);
 
 /*env_utils.c*/
 int _chdir(var_t *vars, char *new_pwd);
+int count_tokens(const char *cmd, const char *delim);
 
 /*handler.c*/
 void _errputs(char *str);
@@ -125,7 +126,7 @@ int test_path(var_t *vars);
 char *my_strtok(char *str, const char *delim);
 char **parse(const char *cmd, const char *delim);
 int _isalpha(char *s);
-void *_memcpy(void *dest, void *src, size_t n);
+void *_memcpy(void *dest, const void *src, size_t n);
 char *_strdup(const char *str);
 
 
@@ -135,7 +136,7 @@ char **handle_separator(char *input);
 char **split_string(char *str, int *num_words, char *delim);
 
 /*memory.c*/
-void ffree(char ***pp);
+void ffree(char **pp);
 
 /*string.c*/
 size_t _strlen(const char *s);

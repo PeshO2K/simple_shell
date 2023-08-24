@@ -11,7 +11,8 @@ Node *build_path_list(var_t *vars)
 	char *PATH =  _getenv(vars, "PATH");
 	Node *head = NULL;
 
-	if ( PATH){
+	if (PATH)
+	{
 	char *path_cpy = _strdup(PATH);
 	char *token = my_strtok(path_cpy, ":");
 

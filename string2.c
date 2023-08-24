@@ -71,7 +71,7 @@ int _strcmp(char *s1, char *s2)
  */
 char *_strchr(const char *s, int c)
 {
-	while (*s >= '\0')
+	while (*s != '\0')
 	{
 		if (*s == (char)c)
 		{

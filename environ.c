@@ -58,9 +58,6 @@ char **copyenv(char **env)
 	newenv[j] = NULL;
 
 	return (newenv);
-
-
-
 }
 /**
  * _setenv - adds or changes environment variable

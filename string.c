@@ -59,10 +59,14 @@ size_t _strlen(const char *s)
 {
 	size_t counter = 0;
 
-	while (*s != '\0')
+	if (s)
 	{
-		counter++;
-		s++;
+
+		while (*s != '\0')
+		{
+			counter++;
+			s++;
+		}
 	}
 	return (counter);
 }
@@ -78,11 +82,14 @@ size_t _strlen(const char *s)
 char *_strcpy(char *dest, const char *src)
 {
 	int i;
-
-	for (i = 0; src[i] != '\0'; i++)
+	if ((dest != src) && (src))
 	{
-		dest[i] = src[i];
+
+		for (i = 0; src[i] != '\0'; i++)
+		{
+			dest[i] = src[i];
+		}
+		dest[i] = '\0';
 	}
-	dest[i] = '\0';
 	return (dest);
 }

@@ -23,7 +23,6 @@ void set_vars(var_t *vars, char **argv)
 {
 	int i = 0;
 	/*printf("\nsetting variables ...\n");*/
-
 	vars->myname = argv[0];
 	/*printf("NAme set, building path ...\n");*/
 	/*vars->PATH = build_path_list(vars);*/
@@ -31,9 +30,13 @@ void set_vars(var_t *vars, char **argv)
 	if (vars->line)
 	{
 		vars->args = parse(vars->line, DELIM);
+		/*while (vars->args[i])
+		{
+			printf("args[%d]: %s\n", i, vars->args[i]);
+			i++;
+		}*/
 		if (!(vars->args))
 		{
-
 			vars->args = malloc(sizeof(char *) * 2);
 			if (vars->args)
 			{
@@ -42,9 +45,9 @@ void set_vars(var_t *vars, char **argv)
 			}
 		}
 		for (i = 0; vars->args && vars->args[i]; i++)
-				;
+		{
+		}
 		vars->argsc = i;
-
 		/*replace_alias(info);*/
 		/*replace_vars(info);*/
 	}
@@ -59,17 +62,20 @@ void set_vars(var_t *vars, char **argv)
 void free_vars(var_t *vars, int all)
 {
 	/* don't forget to free args*/
-	/*vars->args= NULL;*/
+	ffree(vars->args);
+	vars->args = NULL;
 	vars->path = NULL;
+
 	if (all)
 	{
 		free(vars->line);
+		free(vars->path);
 		if (vars->PATH)
 		{
 			free_list(vars->PATH);
 		}
 
-		ffree(&(vars->env));
+		ffree((vars->env));
 		/*vars->env = NULL;*/
 	}
 }
