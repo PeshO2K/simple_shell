@@ -48,21 +48,16 @@ char *my_strtok(char *str, const char *delim)
  *
  * Return: a pointer to the next token in the string, or NULL if there are none
  */
-char **parse(const char *cmd, const char *delim)
+char **parse(char *cmd, const char *delim)
 {
 	char **tokens, *token, *str; 
-	int i = 0, j, size = 10;
+	int i = 0, j, size = 1024;
 	/*printf("\t\tThe command: %s\n", cmd);*/
 	if(!(tokens = malloc((size + 1) * sizeof(char *))))
 	{
 		return (NULL);
 	}
-	if (!(str = malloc((_strlen(cmd) + 1))))
-	{
-		ffree(tokens);
-		return (NULL);
-	}
-	_strcpy(str, cmd);
+	str = cmd;
 	for (;; i++, str = NULL)
 	{
 		if ((token = my_strtok(str, delim)) == NULL)
@@ -78,13 +73,13 @@ char **parse(const char *cmd, const char *delim)
 					free(tokens[j]);
 				}
 				free(tokens);
-				free(str);
+				/*free(str);*/
 				return (NULL);
 			}
 		}
 	}
 	tokens[i] = NULL;
-	free(str);
+	/*free(str);*/
 	return (tokens);	
 }
 /**

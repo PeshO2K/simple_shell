@@ -30,7 +30,10 @@ int shell_loop(var_t *vars, char **argv)
 			set_vars(vars, argv);
 			execute_cmd(vars);
 		}
-		free(vars->line);
+		if((vars->line))
+		{
+			free(vars->line);
+		}
 		free_vars(vars, 0);
 	}
 	free_vars(vars, 1);

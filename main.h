@@ -15,7 +15,7 @@
 #include <errno.h>
 #include <fcntl.h>
 
-#define DELIM " \n\t\r\a"
+#define DELIM " '\n''\t''\r''\a'"
 #define VAR_INIT \
 {NULL, NULL, 0, NULL, NULL, NULL, NULL, \
 	0, 0, 0, 0}
@@ -124,7 +124,7 @@ int test_path(var_t *vars);
 
 /*strtok*/
 char *my_strtok(char *str, const char *delim);
-char **parse(const char *cmd, const char *delim);
+char **parse(char *cmd, const char *delim);
 int _isalpha(char *s);
 void *_memcpy(void *dest, const void *src, size_t n);
 char *_strdup(const char *str);
