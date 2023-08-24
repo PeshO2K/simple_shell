@@ -9,7 +9,7 @@
 
 int shell_loop(var_t *vars, char **argv)
 {
-	ssize_t r = 0, i;
+	ssize_t r = 0;
 	size_t len = 0;
 	int mode;
 
@@ -38,5 +38,6 @@ int shell_loop(var_t *vars, char **argv)
 	{
 		exit(vars->e_status);
 	}
+	return (0);
 }
 	
