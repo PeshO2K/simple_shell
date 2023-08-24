@@ -39,7 +39,6 @@ int _my_exit(var_t *vars)
 int _my_env(var_t *vars)
 {
 	unsigned int i;
-
 	
 	for (i = 0; vars->env[i]; i++)
 	{

@@ -82,8 +82,6 @@ int _setenv(var_t *vars, char *name, char *value)
 	_memcpy(env_var, name, name_len);
 	env_var[name_len] = '=';
 	_memcpy(env_var + name_len + 1, value, value_len);
-
-	
 	
 	if (curr_val && (_strcmp(curr_val, value) != 0))
 	{
@@ -94,7 +92,7 @@ int _setenv(var_t *vars, char *name, char *value)
 	{
 		_putenv(env_var, vars);
 	}
-	free (env_var);
+	/*free (env_var);*/
 
 	return (0);
 }
@@ -118,14 +116,15 @@ int _putenv(char *env_var, var_t *vars)
 		return (-1);
 	}
 
-	_memcpy(new_env, vars->env, env_len * sizeof (char *));
+	/*_memcpy(new_env, vars->env, env_len * sizeof (char *));*/
 
-	for (idx = 0; new_env[idx]; idx++)
+	for (idx = 0; idx < env_len; idx++)
 	{
-		;
+		new_env[idx] = vars->env[idx];
 	}
 	new_env[env_len] = env_var;
 	new_env[env_len + 1] = NULL;
+	ffree(vars->env);
 
 	vars->env = new_env;
 
