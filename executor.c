@@ -54,7 +54,8 @@ int do_fork(var_t *vars)
  */
 int execute_cmd(var_t *vars)
 {
-	int a,b,c,d;
+	int a , b , c, d;
+	int e, status;
 	
 
 
@@ -76,11 +77,17 @@ int execute_cmd(var_t *vars)
 		b = isatty(STDIN_FILENO);
 		c = (vars->PATH != NULL);
 		d = (vars->args[0][0] == '/');
+		e = (vars->args[0][0] == '.');
 
 		if (a && (b || c || d))
 		{
-			
-			return (do_fork(vars));
+			status = do_fork(vars);
+			if (!d && !e)
+			{
+				free(vars->path);
+			}
+
+			return (status);
 		}
 		else
 		{

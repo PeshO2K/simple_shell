@@ -36,6 +36,7 @@ int shell_loop(var_t *vars, char **argv)
 			execute_cmd(vars);
 
 		}
+		free(vars->line);
 		free_vars(vars, 0);
 		
 	}

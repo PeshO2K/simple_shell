@@ -28,32 +28,35 @@ char *_getenv(var_t *vars, const char *name)
 char **copyenv(char **env)
 {
 	char **newenv;
-	int i,j;
+	int i,j,k;
 
 	if (*env == NULL)
 	{
 		return (NULL);
 	}
-
 	for (i = 0; env[i]; i++)
 	{
 		;
 	}
-
-
 	newenv = malloc((i + 1) * sizeof(char *));
 	if (newenv == NULL)
 	{
 		perror("newenv");
 		return (NULL);
 	}
-
 	for (j = 0; j < i; j++)
 	{
-		newenv[j] = _strdup(env[j]);
+		if (!(newenv[j] = _strdup(env[j])))
+		{
+			for (k = 0; k < j; k++)
+			{
+				free(newenv[k]);
+			}
+			free(newenv);
+			return(NULL);
+		}
 	}
 	newenv[j] = NULL;
-
 	return (newenv);
 }
 /**
@@ -110,7 +113,7 @@ int _putenv(char *env_var, var_t *vars)
 	{
 		;
 	}
-	if (!(new_env = malloc((env_len + 2) * sizeof(char **))))
+	if (!(new_env = malloc((env_len + 2) * sizeof(char *))))
 	{
 		return (-1);
 	}
