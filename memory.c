@@ -8,13 +8,12 @@
 void ffree(char **pp)
 {
 	int i;
-	if (!pp)
+	if (pp != NULL)
 	{
-		return;
+		for (i = 0; pp[i]; i++)
+		{
+			free(pp[i]);
+		}
+		free(pp);
 	}
-	for (i = 0; pp[i]; i++)
-	{
-		free(pp[i]);
-	}
-	free(pp);
 }

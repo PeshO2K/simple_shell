@@ -50,31 +50,42 @@ char *my_strtok(char *str, const char *delim)
  */
 char **parse(const char *cmd, const char *delim)
 {
-	char **tokens;
-	char *token, *str;
-	int i = 0;
-	int size = 10;
-
-	tokens = malloc((size + 1) * sizeof(char *));
-	str = _strdup(cmd);
-
-	for (;; i++, str = NULL)
-
+	char **tokens, *token, *str; 
+	int i = 0, j, size = 10;
+	/*printf("\t\tThe command: %s\n", cmd);*/
+	if(!(tokens = malloc((size + 1) * sizeof(char *))))
 	{
-		token = my_strtok(str, delim);
-		if (token == NULL)
+		return (NULL);
+	}
+	if (!(str = malloc((_strlen(cmd) + 1))))
+	{
+		ffree(tokens);
+		return (NULL);
+	}
+	_strcpy(str, cmd);
+	for (;; i++, str = NULL)
+	{
+		if ((token = my_strtok(str, delim)) == NULL)
 		{
 			break;
 		}
 		else
 		{
-			tokens[i] = _strdup(token);
+			if(!(tokens[i] = _strdup(token)))
+			{
+				for (j = 0; j < 1; j++)
+				{
+					free(tokens[j]);
+				}
+				free(tokens);
+				free(str);
+				return (NULL);
+			}
 		}
 	}
 	tokens[i] = NULL;
-
 	free(str);
-	return (tokens);
+	return (tokens);	
 }
 /**
  * _isalpha - if string is alphabet
@@ -110,11 +121,16 @@ char *_strdup(const char *str)
 	}
 
 	len = _strlen(str) + 1;
-	str2 = malloc(len);
+	str2 = malloc(len * sizeof(char));
 
 	if (str2)
 	{
 		_memcpy(str2, str, len);
+	}
+	else 
+	{
+		free(str2);
+		return (NULL);
 	}
 	return (str2);
 }

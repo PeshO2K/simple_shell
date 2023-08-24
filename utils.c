@@ -25,6 +25,8 @@ void set_vars(var_t *vars, char **argv)
 		vars->args = parse(vars->line, DELIM);
 		if (!(vars->args))
 		{
+			ffree(vars->args);
+			vars->args = NULL;
 			vars->args = malloc(sizeof(char *) * 2);
 			if (vars->args)
 			{
@@ -49,13 +51,18 @@ void set_vars(var_t *vars, char **argv)
 void free_vars(var_t *vars, int all)
 {
 	/* don't forget to free args*/
-	ffree(vars->args);
-	vars->args = NULL;
+	if (vars->args)
+	{
+		ffree(vars->args);
+		vars->args = NULL;
+	}
 
 	if (all)
 	{
-		free(vars->line);
-		free(vars->path);
+		if (vars->path)
+		{
+			free(vars->path);
+		}
 		if (vars->PATH)
 		{
 			free_list(vars->PATH);
