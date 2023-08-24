@@ -24,8 +24,9 @@ int _my_exit(var_t *vars)
 
 		
 	}
-	free_vars(vars, 1);
-	exit(vars->e_status);
+	vars->err_num = -2;
+	/*free_vars(vars, 1);
+	exit(vars->e_status);*/
 	return (0);
 	
 }

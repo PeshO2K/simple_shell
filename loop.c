@@ -35,9 +35,13 @@ int shell_loop(var_t *vars, char **argv)
 			free(vars->line);
 		}
 		free_vars(vars, 0);
+		if (vars->err_num == -2)
+		{
+			break;
+		}
 	}
 	free_vars(vars, 1);
-	if (vars->e_status)
+	if (vars->e_status || vars->err_num == -2)
 	{
 		exit(vars->e_status);
 	}

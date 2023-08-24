@@ -9,6 +9,7 @@ void reset_vars(var_t *vars)
 	vars->line = NULL;
 	vars->args = NULL;
 	vars->path = NULL;
+	vars->err_num = 0;
 }
 /**
  * set_vars - initializes reset_vars struct
