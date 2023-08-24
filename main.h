@@ -108,6 +108,7 @@ int _putenv(char *env_var, var_t *vars);
 /*env_utils.c*/
 int _chdir(var_t *vars, char *new_pwd);
 int count_tokens(const char *cmd, const char *delim);
+void comment_handler(char *buff);
 
 /*handler.c*/
 void _errputs(char *str);

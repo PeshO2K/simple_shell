@@ -24,3 +24,22 @@ int _chdir(var_t *vars, char *new_pwd)
 	_setenv(vars, "PWD", new_pwd);
 	return (0);
 }
+/**
+ * comment_handler - replaces '#' with '\0'
+ * @buff: string buffer address
+ * Return: Nothing
+ */
+void comment_handler(char *buff)
+{
+	size_t i = 0;
+
+	for (; buff[i] != '\0'; i++)
+	{
+		
+		if (buff[i] == '#' && (!i || buff[i - 1] == ' '))
+		{
+			buff[i] = '\0';
+			break;
+		}
+	}
+}
