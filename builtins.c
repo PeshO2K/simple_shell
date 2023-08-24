@@ -24,10 +24,6 @@ int _my_exit(var_t *vars)
 
 		
 	}
-	/*else 
-	{
-		vars->e_status = EXIT_SUCCESS;
-	}*/
 	free_vars(vars, 1);
 	exit(vars->e_status);
 	return (0);
@@ -60,8 +56,8 @@ int _my_env(var_t *vars)
  */
 int _my_alias(var_t *vars)
 {
-	        (void) vars;
-		        return (0);
+	(void) vars;
+	return (0);
 }
 
 /**
@@ -79,8 +75,6 @@ int _my_cd(var_t *vars)
 		{
 			dir_path = _getenv(vars, "PWD");
 		}
-		/*_setenv (vars, "PWD", home);
-		_setenv (vars, "OLDPWD", pwd);*/
 	} 
 	else if (_strcmp(vars->args[1],"-") == 0)
 	{
@@ -89,9 +83,6 @@ int _my_cd(var_t *vars)
 			_puts(_getenv(vars, "PWD"));
 			_puts("\n");
 			return (0);
-			/*
-			_setenv(vars, "PWD", oldpwd);
-			_setenv(vars, "OLDPWD", pwd);*/
 		}
 		_puts(dir_path);
 		_puts("\n");
@@ -99,10 +90,6 @@ int _my_cd(var_t *vars)
 	else
 	{
 		dir_path = vars->args[1];
-		/*_chdir(vars, vars->args[1]);*/
-		/*_setenv(vars, "PWD", vars->args[1]);
-		_setenv(vars, "OLDPWD", pwd);*/
-
 	}
 	return (_chdir(vars, dir_path));
 }

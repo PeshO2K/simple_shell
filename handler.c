@@ -42,8 +42,6 @@ void print_error(var_t *vars, char *emsg)
 	}
 }
 
-
-
 /**
  * _uitoa - converts an unsigned int to a string
  * @count: unsigned int to convert
@@ -54,8 +52,6 @@ char *_uitoa(unsigned int count)
 {
 	char *numstr;
 	unsigned int tmp, digits;
-	
-	
 
 	tmp = count;
 	for (digits = 0; tmp != 0; digits++)

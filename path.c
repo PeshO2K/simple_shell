@@ -7,7 +7,6 @@
   */
 Node *build_path_list(var_t *vars)
 {
-	/*printf("Building path\n");*/
 	char *PATH =  _getenv(vars, "PATH");
 	Node *head = NULL;
 
@@ -24,7 +23,6 @@ Node *build_path_list(var_t *vars)
 	}
 	free(path_cpy);
 	}
-	/*printf("Path built!!\n");*/
 	return (head);
 }
 
@@ -35,8 +33,6 @@ Node *build_path_list(var_t *vars)
   */
 char *find_file_in_path(var_t *vars)
 {
-	/*printf("finding file\n");*/
-	/*Node *cursor = head;*/
 	Node *cursor = vars->PATH;
 	size_t full_path_len;
 	char *full_path, *filename = vars->args[0];

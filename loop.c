@@ -12,7 +12,6 @@ int shell_loop(var_t *vars, char **argv)
 	size_t len = 0;
 	int mode;
 	int count = 0;
-	
 
 	mode = isatty(STDIN_FILENO);
 
@@ -21,7 +20,6 @@ int shell_loop(var_t *vars, char **argv)
 		reset_vars(vars);
 		count++;
 
-		/*printf("\t loop number: %u, r = %lu\n ", count, r);*/
 
 		if (mode == 1)
 		{
@@ -30,28 +28,17 @@ int shell_loop(var_t *vars, char **argv)
 		
 
 		signal(SIGINT,sigintHandler);
-		
-		/*printf("Bginning line reading \n");*/
 		r = getline(&(vars->line), &len, stdin);
 
-		/*printf("Success reading line\n");*/
-
-		
 		if (r != -1)
 		{
-			
 			set_vars(vars, argv);
-			/*handle command separators here**/
 			execute_cmd(vars);
 
 		}
 		free_vars(vars, 0);
 		
 	}
-	/*if (r == EOF)
-	{
-		_puts("\n");
-	}*/
 	free_vars(vars, 1);
 	
 	if (vars->e_status)

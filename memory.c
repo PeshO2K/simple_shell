@@ -17,18 +17,4 @@ void ffree(char **pp)
 		free(pp[i]);
 	}
 	free(pp);
-	/*while (*pp)
-	{
-		free(*pp++);
-	}
-	free(a);
-	
-	int i = 0;
-	while(*pp && (*pp)[i] != NULL)
-	{
-		free((*pp)[i]);
-		i++;
-	}
-	free(*pp);
-	*/
 }

@@ -50,20 +50,18 @@ char *my_strtok(char *str, const char *delim)
  */
 char **parse(const char *cmd, const char *delim)
 {
-	char **tokens; /*[];*/
+	char **tokens;
 	char *token, *str;
 	int i = 0;
 	int size = 10;
 
 	tokens = malloc((size + 1) * sizeof(char *));
-	/*str = malloc(sizeof(char) * sizeof(cmd));*/
 	str = _strdup(cmd);
 
 	for (;; i++, str = NULL)
 
 	{
 		token = my_strtok(str, delim);
-		/*tokens[i] = _strdup(token);*//*strtok (str, delim);*/
 		if (token == NULL)
 		{
 			break;
