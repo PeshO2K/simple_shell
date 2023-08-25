@@ -44,7 +44,6 @@ typedef struct Node
  * @path : cmd_path
  * @args: arguments at opening of shell
  * @myname: the program filename
- * @rdfd: file descriptor
  * @err_num: error number
  * @PATH: a list of  path directories
  * @e_status: exit status
@@ -63,7 +62,6 @@ typedef struct my_variables
 	int line_count_flag;
 	int err_num;
 	int e_status;
-/*	int rdfd;*/
 } var_t;
 
 Node *new_node(const char *data);
@@ -161,5 +159,5 @@ void set_vars(var_t *vars, char **argv);
 void reset_vars(var_t *vars);
 int interactive(var_t *vars);
 
-int shell_loop(var_t *vars,char **argv);
+int shell_loop(var_t *vars, char **argv);
 #endif

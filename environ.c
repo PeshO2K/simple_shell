@@ -46,7 +46,7 @@ char **copyenv(char **env)
 	for (j = 0; j < i; j++)
 	{
 		newenv[j] = _strdup(env[j]);
-		if (!(newenv[j] ))
+		if (!(newenv[j]))
 		{
 			for (k = 0; k < j; k++)
 			{
@@ -122,7 +122,7 @@ int _putenv(char *env_var, var_t *vars)
 		;
 	}
 	new_env = malloc((env_len + 2) * sizeof(char *));
-	if (!(new_env ))
+	if (!(new_env))
 	{
 		return (-1);
 	}

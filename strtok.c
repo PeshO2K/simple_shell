@@ -54,7 +54,7 @@ char **parse(char *cmd, const char *delim)
 	int i = 0, j, size = 1024;
 
 	tokens = malloc((size + 1) * sizeof(char *));
-	if(!tokens)
+	if (!tokens)
 	{
 		return (NULL);
 	}
@@ -69,7 +69,7 @@ char **parse(char *cmd, const char *delim)
 		else
 		{
 			tokens[i] = _strdup(token);
-			if(!(tokens[i] ))
+			if (!(tokens[i]))
 			{
 				for (j = 0; j < 1; j++)
 				{
@@ -123,7 +123,7 @@ char *_strdup(const char *str)
 	{
 		_memcpy(str2, str, len);
 	}
-	else 
+	else
 	{
 		free(str2);
 		return (NULL);

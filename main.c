@@ -12,7 +12,7 @@ int main(int __attribute__((__unused__)) argc, char **argv, char **environ)
 
 	vars->env = copyenv(environ);
 
-	if(*(vars->env))
+	if (*(vars->env))
 	{
 		vars->PATH = build_path_list(vars);
 	}
