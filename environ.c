@@ -68,7 +68,7 @@ char **copyenv(char **env)
  */
 int _setenv(var_t *vars, char *name, char *value)
 {
-	char *env_var, *curr_val, *new_curr_val;
+	char *env_var, *curr_val;
 
 	size_t name_len = _strlen(name);
 	size_t value_len = _strlen(value);
