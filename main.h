@@ -43,6 +43,7 @@ typedef struct Node
  * @line_count_flag: if on count this line of input
  * @path : cmd_path
  * @args: arguments at opening of shell
+ * @argsc: arguments at opening of shell1
  * @myname: the program filename
  * @err_num: error number
  * @PATH: a list of  path directories
