@@ -36,7 +36,6 @@ void comment_handler(char *buff)
 
 	for (; buff[i] != '\0'; i++)
 	{
-		
 		if (buff[i] == '#' && (!i || buff[i - 1] == ' '))
 		{
 			buff[i] = '\0';
@@ -44,10 +43,15 @@ void comment_handler(char *buff)
 		}
 	}
 }
+/**
+ * separator_handler- separates cmd with ;
+ * @buff: string cmd
+ * Return: nothing
+ */
 void separator_handler(char *buff)
 {
 	size_t i = 0;
-	
+
 	for (; buff[i] != '\0'; i++)
 	{
 		if (buff[i] == ';')

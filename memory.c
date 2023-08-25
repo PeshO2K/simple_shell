@@ -8,6 +8,7 @@
 void ffree(char **pp)
 {
 	int i;
+
 	if (pp != NULL)
 	{
 		for (i = 0; pp[i]; i++)

@@ -9,6 +9,7 @@
 int main(int __attribute__((__unused__)) argc, char **argv, char **environ)
 {
 	var_t vars [] = { VAR_INIT };
+
 	vars->env = copyenv(environ);
 
 	if(*(vars->env))

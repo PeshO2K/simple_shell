@@ -14,7 +14,7 @@ int shell_loop(var_t *vars, char **argv)
 	int mode;
 
 	mode = isatty(STDIN_FILENO);
-	while(r != -1)
+	while (r != -1)
 	{
 		reset_vars(vars);
 
@@ -22,7 +22,7 @@ int shell_loop(var_t *vars, char **argv)
 		{
 			_puts("$ ");
 		}
-		signal(SIGINT,sigintHandler);
+		signal(SIGINT, sigintHandler);
 		r = getline(&(vars->line), &len, stdin);
 		/*printf("\tthe line length:%lu\t\n", r);*/
 		if (r != -1)
@@ -32,7 +32,7 @@ int shell_loop(var_t *vars, char **argv)
 			set_vars(vars, argv);
 			execute_cmd(vars);
 		}
-		if((vars->line))
+		if ((vars->line))
 		{
 			free(vars->line);
 		}
@@ -49,4 +49,3 @@ int shell_loop(var_t *vars, char **argv)
 	}
 	return (0);
 }
-	

@@ -54,10 +54,8 @@ int do_fork(var_t *vars)
  */
 int execute_cmd(var_t *vars)
 {
-	int a , b , c, d;
+	int a, b, c, d;
 	int e, status;
-	
-
 
 	if (vars->args[0] && (execute_builtin(vars) == 1))
 	{

@@ -20,6 +20,7 @@ void reset_vars(var_t *vars)
 void set_vars(var_t *vars, char **argv)
 {
 	int i = 0;
+
 	vars->myname = argv[0];
 	if (vars->line)
 	{
@@ -37,7 +38,7 @@ void set_vars(var_t *vars, char **argv)
 		}
 		for (i = 0; vars->args && vars->args[i]; i++)
 		{
-			/*printf("My args: %d: %s\n", i, vars->args[i])*/;
+			;
 		}
 		vars->argsc = i;
 	}

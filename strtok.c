@@ -50,37 +50,38 @@ char *my_strtok(char *str, const char *delim)
  */
 char **parse(char *cmd, const char *delim)
 {
-	char **tokens, *token, *str; 
+	char **tokens, *token, *str;
 	int i = 0, j, size = 1024;
-	/*printf("\t\tThe command: %s\n", cmd);*/
-	if(!(tokens = malloc((size + 1) * sizeof(char *))))
+
+	tokens = malloc((size + 1) * sizeof(char *));
+	if(!tokens)
 	{
 		return (NULL);
 	}
 	str = cmd;
 	for (;; i++, str = NULL)
 	{
-		if ((token = my_strtok(str, delim)) == NULL)
+		token = my_strtok(str, delim);
+		if (token == NULL)
 		{
 			break;
 		}
 		else
 		{
-			if(!(tokens[i] = _strdup(token)))
+			tokens[i] = _strdup(token);
+			if(!(tokens[i] ))
 			{
 				for (j = 0; j < 1; j++)
 				{
 					free(tokens[j]);
 				}
 				free(tokens);
-				/*free(str);*/
 				return (NULL);
 			}
 		}
 	}
 	tokens[i] = NULL;
-	/*free(str);*/
-	return (tokens);	
+	return (tokens);
 }
 /**
  * _isalpha - if string is alphabet

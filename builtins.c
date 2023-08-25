@@ -7,7 +7,7 @@
 int _my_exit(var_t *vars)
 {
 	if (vars->args[1])
-	{ 
+	{
 		vars->e_status = _atoi(vars->args[1]);
 
 		if ((vars->e_status < 0) || (_isalpha(vars->args[1])))
@@ -17,18 +17,14 @@ int _my_exit(var_t *vars)
 			_errputs(vars->args[1]);
 			_errputs("\n");
 		}
-		else if(vars->e_status > 255)
+		else if (vars->e_status > 255)
 		{
 			vars->e_status = 232;
 		}
 
-		
 	}
 	vars->err_num = -2;
-	/*free_vars(vars, 1);
-	exit(vars->e_status);*/
 	return (0);
-	
 }
 
 /**
@@ -39,7 +35,7 @@ int _my_exit(var_t *vars)
 int _my_env(var_t *vars)
 {
 	unsigned int i;
-	
+
 	for (i = 0; vars->env[i]; i++)
 	{
 		_puts(vars->env[i]);
@@ -71,14 +67,16 @@ int _my_cd(var_t *vars)
 
 	if (vars->argsc == 1)
 	{
-		if(!(dir_path = _getenv(vars, "HOME")))
+		dir_path = _getenv(vars, "HOME");
+		if (!(dir_path))
 		{
 			dir_path = _getenv(vars, "PWD");
 		}
-	} 
+	}
 	else if (_strcmp(vars->args[1], "-") == 0)
 	{
-		if (!(dir_path = _getenv(vars, "OLDPWD")))
+		dir_path = _getenv(vars, "OLDPWD");
+		if (!(dir_path))
 		{
 			_puts(_getenv(vars, "PWD"));
 			_puts("\n");

@@ -76,7 +76,7 @@ char *_uitoa(unsigned int count)
  * @count: unsigned int to convert
  * Return: nothing
  */
-void print_unsigned_int(unsigned int n) 
+void print_unsigned_int(unsigned int n)
 {
 	char buffer[10];
 	int i = 0;

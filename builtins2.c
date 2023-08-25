@@ -1,8 +1,8 @@
 #include "main.h"
 /**
  * _my_setenv - sets env variable
- * @vars - global variable struct
- * Return 0 success, -1 on error
+ * @vars: - global variable struct
+ * Return: 0 success, -1 on error
  */
 int _my_setenv(var_t *vars)
 {
@@ -16,9 +16,9 @@ int _my_setenv(var_t *vars)
 }
 /**
  * _my_unsetenv - removes env var
- * @vars - global variable struct
- * Return 0 success, -1 on error
- * */
+ * @vars: - global variable struct
+ * Return: 0 success, -1 on error
+ */
 int _my_unsetenv(var_t *vars)
 {
 	if (vars->argsc != 2)

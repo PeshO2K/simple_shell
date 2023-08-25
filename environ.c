@@ -22,13 +22,12 @@ char *_getenv(var_t *vars, const char *name)
 /**
  * copyenv - copy environment
  * @env: environment
- * 
  * Return: NULL on failure pointer on sucess
  */
 char **copyenv(char **env)
 {
 	char **newenv;
-	int i,j,k;
+	int i, j, k;
 
 	if (*env == NULL)
 	{
@@ -46,14 +45,15 @@ char **copyenv(char **env)
 	}
 	for (j = 0; j < i; j++)
 	{
-		if (!(newenv[j] = _strdup(env[j])))
+		newenv[j] = _strdup(env[j]);
+		if (!(newenv[j] ))
 		{
 			for (k = 0; k < j; k++)
 			{
 				free(newenv[k]);
 			}
 			free(newenv);
-			return(NULL);
+			return (NULL);
 		}
 	}
 	newenv[j] = NULL;
@@ -83,7 +83,7 @@ int _setenv(var_t *vars, char *name, char *value)
 	env_var[name_len] = '=';
 	_memcpy(env_var + name_len + 1, value, value_len);
 	env_var[name_len + value_len + 1] = '\0';
-	
+
 	if (curr_val && (_strcmp(curr_val, value) != 0))
 	{
 		curr_val = curr_val - name_len - 1;
@@ -121,7 +121,8 @@ int _putenv(char *env_var, var_t *vars)
 	{
 		;
 	}
-	if (!(new_env = malloc((env_len + 2) * sizeof(char *))))
+	new_env = malloc((env_len + 2) * sizeof(char *));
+	if (!(new_env ))
 	{
 		return (-1);
 	}
@@ -143,7 +144,8 @@ int _putenv(char *env_var, var_t *vars)
 /**
  * _unsetenv - deletes environment variable
  * @vars: struct containing variables
- * Return: 0 on success, -1 on error. 
+ * @name: env var
+ * Return: 0 on success, -1 on error.
  */
 int _unsetenv(var_t *vars, char *name)
 {
@@ -155,7 +157,7 @@ int _unsetenv(var_t *vars, char *name)
 	{
 		curr_val = curr_val - (_strlen(name)) - 1;
 
-		while(vars->env[idx] != curr_val)
+		while (vars->env[idx] != curr_val)
 		{
 			idx++;
 		}
