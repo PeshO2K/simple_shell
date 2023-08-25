@@ -109,7 +109,7 @@ int _putenv(char *env_var, var_t *vars);
 int _chdir(var_t *vars, char *new_pwd);
 int count_tokens(const char *cmd, const char *delim);
 void comment_handler(char *buff);
-
+void separator_handler(char *buff);
 /*handler.c*/
 void _errputs(char *str);
 void print_error(var_t *vars, char *emsg);

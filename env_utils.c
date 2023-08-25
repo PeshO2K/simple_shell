@@ -12,9 +12,10 @@ int _chdir(var_t *vars, char *new_pwd)
 
 	if (chdir(new_pwd) == -1)
 	{
-		emsg = malloc((strlen(cd_msg) + _strlen(new_pwd)) * sizeof(char));
+		emsg = malloc((strlen(cd_msg) + _strlen(new_pwd) + 1) * sizeof(char));
 		_memcpy(emsg, cd_msg, _strlen(cd_msg));
 		_memcpy(emsg + _strlen(cd_msg), new_pwd, _strlen(new_pwd));
+		emsg[_strlen(cd_msg) + _strlen(new_pwd)] = '\0';
 		print_error(vars, emsg);
 		_errputs("\n");
 		free(emsg);
@@ -40,6 +41,18 @@ void comment_handler(char *buff)
 		{
 			buff[i] = '\0';
 			break;
+		}
+	}
+}
+void separator_handler(char *buff)
+{
+	size_t i = 0;
+	
+	for (; buff[i] != '\0'; i++)
+	{
+		if (buff[i] == ';')
+		{
+			buff[i] = '\n';
 		}
 	}
 }

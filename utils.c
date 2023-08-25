@@ -37,7 +37,7 @@ void set_vars(var_t *vars, char **argv)
 		}
 		for (i = 0; vars->args && vars->args[i]; i++)
 		{
-			;
+			/*printf("My args: %d: %s\n", i, vars->args[i])*/;
 		}
 		vars->argsc = i;
 	}

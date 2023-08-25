@@ -28,6 +28,7 @@ int shell_loop(var_t *vars, char **argv)
 		if (r != -1)
 		{
 			comment_handler(vars->line);
+			separator_handler(vars->line);
 			set_vars(vars, argv);
 			execute_cmd(vars);
 		}

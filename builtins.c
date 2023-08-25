@@ -76,7 +76,7 @@ int _my_cd(var_t *vars)
 			dir_path = _getenv(vars, "PWD");
 		}
 	} 
-	else if (_strcmp(vars->args[1],"-") == 0)
+	else if (_strcmp(vars->args[1], "-") == 0)
 	{
 		if (!(dir_path = _getenv(vars, "OLDPWD")))
 		{
