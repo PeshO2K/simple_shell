@@ -73,7 +73,7 @@ char *_uitoa(unsigned int count)
 }
 /**
  * print_unsigned_int - prints unsigned int
- * @count: unsigned int to convert
+ * @n: unsigned int to convert
  * Return: nothing
  */
 void print_unsigned_int(unsigned int n)
